@@ -31,6 +31,18 @@ Containerized alternative (no host package install):
 make all-container
 ```
 
+Install the built non-debug RPMs from this directory onto the host:
+
+```bash
+make install-built
+```
+
+Preview what would be installed (no changes):
+
+```bash
+./scripts/install-built-rpms.sh --dry-run
+```
+
 ## Outputs
 
 - wlroots RPMs: `wlroots-rpm/rpmbuild/RPMS`

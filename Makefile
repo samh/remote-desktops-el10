@@ -1,6 +1,6 @@
 SHELL := /usr/bin/bash
 
-.PHONY: help wlroots-deps wlroots-source wlroots-rpm wlroots-install sway-deps sway-source sway-rpm all all-container
+.PHONY: help wlroots-deps wlroots-source wlroots-rpm wlroots-install sway-deps sway-source sway-rpm install-built all all-container
 
 help:
 	@echo "Top-level RPM stack targets:"
@@ -11,6 +11,7 @@ help:
 	@echo "  make sway-deps       - install sway build dependencies"
 	@echo "  make sway-source     - fetch/verify sway source"
 	@echo "  make sway-rpm        - build sway RPMs"
+	@echo "  make install-built   - install locally built wlroots+sway RPMs"
 	@echo "  make all             - build/install wlroots, then build sway"
 	@echo "  make all-container   - same pipeline inside an AlmaLinux container (no host sudo)"
 
@@ -34,6 +35,9 @@ sway-source:
 
 sway-rpm:
 	@$(MAKE) -C sway-rpm rpm
+
+install-built:
+	@./scripts/install-built-rpms.sh
 
 all: wlroots-deps wlroots-rpm wlroots-install sway-deps sway-rpm
 
