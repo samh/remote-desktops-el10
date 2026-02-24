@@ -1,0 +1,11 @@
+FROM almalinux:10.1
+
+WORKDIR /work
+COPY . /work
+
+RUN set -eux; \
+    mapfile -t deps < <(grep -Ev '^\s*(#|$)' /work/build-deps.txt); \
+    dnf -y install "${deps[@]}" curl ca-certificates; \
+    dnf clean all
+
+RUN /work/scripts/build-rpm.sh

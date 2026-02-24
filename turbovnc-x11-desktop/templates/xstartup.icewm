@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+
+if [[ -r "$HOME/.Xresources" ]]; then
+  xrdb "$HOME/.Xresources"
+fi
+
+export XDG_SESSION_TYPE=x11
+export DESKTOP_SESSION=icewm
+export XDG_CURRENT_DESKTOP=ICEWM
+
+if command -v icewm-session >/dev/null 2>&1; then
+  exec dbus-launch --exit-with-session icewm-session
+fi
+
+exec dbus-launch --exit-with-session icewm

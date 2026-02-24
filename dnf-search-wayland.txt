@@ -1,0 +1,102 @@
+samh@alma10:~/src/remotedesktop$ sudo dnf search wayland
+Last metadata expiration check: 0:28:54 ago on Tue 24 Feb 2026 08:49:17 AM EST.
+=============================================== Name & Summary Matched: wayland ===============================================
+dmenu-wayland.x86_64 : An efficient dynamic menu for wayland (wlroots)
+egl-wayland.x86_64 : EGLStream-based Wayland external platform
+egl-wayland-devel.x86_64 : EGLStream-based Wayland external platform development files
+egl-wayland2.x86_64 : Dma-buf-based Wayland external platform library
+gnome-session-wayland-session.x86_64 : Desktop file for wayland based gnome session
+ibus-wayland.x86_64 : IBus IM module for Wayland
+initial-setup-gui-wayland-generic.x86_64 : Run the initial-setup GUI in Wayland
+initial-setup-gui-wayland-plasma.noarch : Run initial-setup GUI on Plasma Wayland
+kwayland.x86_64 : Qt-style API to interact with the wayland-client API
+kwayland-devel.x86_64 : Development files for kwayland
+kwayland-doc.noarch : Developer Documentation files for kwayland
+libwayland-client.x86_64 : Wayland client library
+libwayland-cursor.x86_64 : Wayland cursor library
+libwayland-egl.x86_64 : Wayland egl library
+libwayland-server.x86_64 : Wayland server library
+plasma-wayland-protocols.x86_64 : Plasma Specific Protocols for Wayland
+plasma-wayland-protocols-devel.x86_64 : Development files for plasma-wayland-protocols
+qt5-qtwayland.x86_64 : Qt5 - Wayland platform support and QtCompositor module
+qt5-qtwayland-devel.x86_64 : Development files for qt5-qtwayland
+qt5-qtwayland-doc.noarch : Documentation for qtwayland
+qt5-qtwayland-examples.x86_64 : Programming examples for qt5-qtwayland
+qt6-qtwayland.x86_64 : Qt6 - Wayland platform support and QtCompositor module
+qt6-qtwayland-devel.x86_64 : Development files for qt6-qtwayland
+qt6-qtwayland-examples.x86_64 : Programming examples for qt6-qtwayland
+qt6-qtwayland-tests.x86_64 : Unit tests for qt6-qtwayland
+rust-wayland-backend+client_system-devel.noarch : Low-level bindings to the Wayland protocol
+rust-wayland-backend+default-devel.noarch : Low-level bindings to the Wayland protocol
+rust-wayland-backend+dlopen-devel.noarch : Low-level bindings to the Wayland protocol
+rust-wayland-backend+log-devel.noarch : Low-level bindings to the Wayland protocol
+rust-wayland-backend+raw-window-handle-devel.noarch : Low-level bindings to the Wayland protocol
+rust-wayland-backend+rwh_06-devel.noarch : Low-level bindings to the Wayland protocol
+rust-wayland-backend+server_system-devel.noarch : Low-level bindings to the Wayland protocol
+rust-wayland-backend-devel.noarch : Low-level bindings to the Wayland protocol
+rust-wayland-client+default-devel.noarch : Bindings to the standard C implementation of the wayland protocol, client side
+rust-wayland-client+log-devel.noarch : Bindings to the standard C implementation of the wayland protocol, client side
+rust-wayland-client-devel.noarch : Bindings to the standard C implementation of the wayland protocol, client side
+rust-wayland-cursor+default-devel.noarch : Bindings to libwayland-cursor
+rust-wayland-cursor-devel.noarch : Bindings to libwayland-cursor
+rust-wayland-protocols+client-devel.noarch : Generated API for the officials wayland protocol extensions
+rust-wayland-protocols+default-devel.noarch : Generated API for the officials wayland protocol extensions
+rust-wayland-protocols+server-devel.noarch : Generated API for the officials wayland protocol extensions
+rust-wayland-protocols+staging-devel.noarch : Generated API for the officials wayland protocol extensions
+rust-wayland-protocols+unstable-devel.noarch : Generated API for the officials wayland protocol extensions
+rust-wayland-protocols+wayland-client-devel.noarch : Generated API for the officials wayland protocol extensions
+rust-wayland-protocols+wayland-server-devel.noarch : Generated API for the officials wayland protocol extensions
+rust-wayland-protocols-devel.noarch : Generated API for the officials wayland protocol extensions
+rust-wayland-protocols-wlr+client-devel.noarch : Generated API for the WLR wayland protocol extensions
+rust-wayland-protocols-wlr+default-devel.noarch : Generated API for the WLR wayland protocol extensions
+rust-wayland-protocols-wlr+server-devel.noarch : Generated API for the WLR wayland protocol extensions
+rust-wayland-protocols-wlr+wayland-client-devel.noarch : Generated API for the WLR wayland protocol extensions
+rust-wayland-protocols-wlr+wayland-server-devel.noarch : Generated API for the WLR wayland protocol extensions
+rust-wayland-protocols-wlr-devel.noarch : Generated API for the WLR wayland protocol extensions
+rust-wayland-scanner+default-devel.noarch : Wayland Scanner for generating rust APIs from XML wayland protocol files
+rust-wayland-scanner-devel.noarch : Wayland Scanner for generating rust APIs from XML wayland protocol files
+rust-wayland-server+default-devel.noarch : Bindings to the standard C implementation of the wayland protocol, server side
+rust-wayland-server+log-devel.noarch : Bindings to the standard C implementation of the wayland protocol, server side
+rust-wayland-server-devel.noarch : Bindings to the standard C implementation of the wayland protocol, server side
+rust-wayland-sys+client-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+rust-wayland-sys+cursor-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+rust-wayland-sys+default-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+rust-wayland-sys+dlopen-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+rust-wayland-sys+egl-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+rust-wayland-sys+libc-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+rust-wayland-sys+memoffset-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+rust-wayland-sys+once_cell-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+rust-wayland-sys+server-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+rust-wayland-sys-devel.noarch : FFI bindings to the various libwayland-*.so libraries
+sddm-wayland-generic.noarch : Generic Wayland SDDM greeter configuration
+sddm-wayland-plasma.noarch : Plasma Wayland SDDM greeter configuration
+wayland-devel.x86_64 : Development files for wayland
+wayland-doc.noarch : Wayland development documentation
+wayland-protocols-devel.noarch : Wayland protocols that adds functionality not available in the core protocol
+wayland-utils.x86_64 : Wayland utilities
+xisxwayland.x86_64 : Tool to check if the X server is XWayland
+xorg-x11-server-Xwayland.x86_64 : Xwayland
+xwayland-run.noarch : Set of utilities to run headless X/Wayland clients
+xwaylandvideobridge.x86_64 : Utility to allow streaming Wayland windows to X applications
+==================================================== Name Matched: wayland ====================================================
+rust-arboard+wayland-data-control-devel.noarch : Image and text handling for the OS clipboard
+xorg-x11-server-Xwayland-devel.x86_64 : Development package
+================================================== Summary Matched: wayland ===================================================
+VK_hdr_layer.x86_64 : Vulkan Wayland HDR WSI Layer
+frog-protocols.noarch : Faster moving Wayland protocols
+gnome-ponytail-daemon.x86_64 : Sort of a bridge for dogtail for GNOME on Wayland
+kwin-common.x86_64 : Common files for KWin X11 and KWin Wayland
+libdecor.x86_64 : Wayland client side decoration library
+rust-wl-clipboard-rs+default-devel.noarch : Access to the Wayland clipboard for terminal and other window-less applications
+rust-wl-clipboard-rs+dlopen-devel.noarch : Access to the Wayland clipboard for terminal and other window-less applications
+rust-wl-clipboard-rs+native_lib-devel.noarch : Access to the Wayland clipboard for terminal and other window-less applications
+rust-wl-clipboard-rs-devel.noarch : Access to the Wayland clipboard for terminal and other window-less applications
+waycheck.x86_64 : Simple GUI that displays protocols implemented by a Wayland compositor
+waynergy.x86_64 : Synergy client for Wayland compositors
+waypipe.x86_64 : Wayland forwarding proxy
+wayvnc.x86_64 : A VNC server for wlroots based Wayland compositors
+weston.x86_64 : Reference compositor for Wayland
+wl-clipboard.x86_64 : Command-line copy/paste utilities for Wayland
+wlcs.x86_64 : Wayland Conformance Test Suite
+wlroots.x86_64 : A modular Wayland compositor library
+
