@@ -42,8 +42,7 @@ Sway is a tiling Wayland compositor and drop-in replacement for i3.
   -Ddefault-wallpaper=false \
   -Dman-pages=enabled \
   -Dsd-bus-provider=libsystemd \
-  -Dtray=enabled \
-  -Dxwayland=enabled
+  -Dtray=enabled
 %meson_build
 
 %install
@@ -53,11 +52,15 @@ find %{buildroot} -type f -name '*.la' -delete
 %files
 %license LICENSE
 %doc README.md
-%{_bindir}/sway*
+%config(noreplace) %{_sysconfdir}/sway/config
+%{_bindir}/sway
+%{_bindir}/swaybar
 %{_bindir}/swaymsg
-%{_datadir}/sway
+%{_bindir}/swaynag
+%{_datadir}/bash-completion/completions/sway*
+%{_datadir}/fish/vendor_completions.d/sway*.fish
 %{_datadir}/wayland-sessions/sway.desktop
-%{_libexecdir}/sway
+%{_datadir}/zsh/site-functions/_sway*
 %{_mandir}/man1/sway*.1*
 %{_mandir}/man5/sway*.5*
 %{_mandir}/man7/sway*.7*

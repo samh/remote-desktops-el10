@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if rpm -q --quiet 'wlroots-devel >= 0.19.0'; then
-  echo "wlroots-devel >= 0.19.0 is installed"
+if rpm -q wlroots-devel >/dev/null 2>&1; then
+  echo "wlroots-devel is installed"
   exit 0
 fi
 

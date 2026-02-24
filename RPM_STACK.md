@@ -25,6 +25,12 @@ make sway-deps
 make sway-rpm
 ```
 
+Containerized alternative (no host package install):
+
+```bash
+make all-container
+```
+
 ## Outputs
 
 - wlroots RPMs: `wlroots-rpm/rpmbuild/RPMS`

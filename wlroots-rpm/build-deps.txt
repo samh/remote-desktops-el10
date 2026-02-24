@@ -5,7 +5,7 @@ gcc
 meson
 pkgconf-pkg-config
 curl
-hwdata
+hwdata-devel
 libdisplay-info-devel
 libdrm-devel
 libglvnd-devel
