@@ -1,0 +1,15 @@
+[Unit]
+Description=Headless Sway session for wayvnc
+After=default.target
+
+[Service]
+Type=simple
+Environment=WLR_BACKENDS=headless
+Environment=WLR_LIBINPUT_NO_DEVICES=1
+Environment=WLR_RENDERER=pixman
+ExecStart=/usr/bin/sway --config %h/.config/sway/config
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

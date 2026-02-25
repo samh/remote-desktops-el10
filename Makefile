@@ -1,6 +1,6 @@
 SHELL := /usr/bin/bash
 
-.PHONY: help wlroots-deps wlroots-source wlroots-rpm wlroots-install sway-deps sway-source sway-rpm install-built all all-container
+.PHONY: help wlroots-deps wlroots-source wlroots-rpm wlroots-install sway-deps sway-source sway-rpm install-built setup-remote-session all all-container
 
 help:
 	@echo "Top-level RPM stack targets:"
@@ -12,6 +12,7 @@ help:
 	@echo "  make sway-source     - fetch/verify sway source"
 	@echo "  make sway-rpm        - build sway RPMs"
 	@echo "  make install-built   - install locally built wlroots+sway RPMs"
+	@echo "  make setup-remote-session - configure headless sway+wayvnc user session (run as root)"
 	@echo "  make all             - build/install wlroots, then build sway"
 	@echo "  make all-container   - same pipeline inside an AlmaLinux container (no host sudo)"
 
@@ -38,6 +39,9 @@ sway-rpm:
 
 install-built:
 	@./scripts/install-built-rpms.sh
+
+setup-remote-session:
+	@./scripts/setup-remote-wayvnc-user.sh
 
 all: wlroots-deps wlroots-rpm wlroots-install sway-deps sway-rpm
 

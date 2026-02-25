@@ -43,6 +43,33 @@ Preview what would be installed (no changes):
 ./scripts/install-built-rpms.sh --dry-run
 ```
 
+## Configure Dedicated Remote Session
+
+Configure a dedicated headless Sway + wayvnc user session:
+
+```bash
+sudo make setup-remote-session
+```
+
+Optional environment overrides:
+
+```bash
+sudo REMOTE_USER=remotevnc \
+  WAYVNC_BIND_ADDRESS=0.0.0.0 \
+  WAYVNC_PORT=5900 \
+  WAYVNC_USERNAME=remotevnc \
+  WAYVNC_PASSWORD='strong-password' \
+  make setup-remote-session
+```
+
+The setup script installs:
+
+- `~/.config/sway/config` from `remote-session/sway.config`
+- `~/.config/wayvnc/config` with TLS + auth enabled
+- `~/.config/systemd/user/sway-headless.service`
+
+and enables `sway-headless.service` in the remote user's systemd user manager.
+
 ## Outputs
 
 - wlroots RPMs: `wlroots-rpm/rpmbuild/RPMS`
