@@ -18,6 +18,9 @@ It provides:
 - `scripts/write-xstartup.sh`: legacy helper (not primary for TurboVNC 3.3+)
 - `templates/xstartup.icewm`: legacy startup template for IceWM
 - `templates/xstartup.gnome`: legacy startup template for GNOME
+- `icewm-profile/`: saved known-good IceWM user config snapshot
+- `scripts/icewm-app-search.sh`: fzf-based desktop app search launcher
+- `scripts/apply-icewm-profile.sh`: installs saved IceWM profile into your home dir
 
 ## Usage
 
@@ -41,6 +44,13 @@ IceWM background color:
 - set a light background: `make bg-icewm-light`
 - custom color: `./scripts/set-icewm-background.sh '#f2f4f7'`
 - then reconnect through your normal SSH/session-manager flow
+
+Restore saved IceWM profile:
+
+- `./scripts/apply-icewm-profile.sh`
+- this writes `~/.icewm/menu`, `~/.icewm/toolbar`, `~/.icewm/prefoverride`
+- this installs `~/.local/bin/icewm-app-search`
+- existing files are backed up as `*.bak.<timestamp>`
 
 Custom-build path:
 

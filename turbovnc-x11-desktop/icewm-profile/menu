@@ -1,0 +1,8 @@
+menu "Applications" folder {
+  prog "Terminal" xterm xterm
+  prog "Files" nautilus nautilus
+  prog "Web Browser" firefox firefox
+}
+separator
+prog "App Search" xterm xterm -e /home/samh/.local/bin/icewm-app-search
+prog "Restart IceWM" icewm icewm --restart
