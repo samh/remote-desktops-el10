@@ -13,6 +13,8 @@ fi
 profile="$1"
 output="${2:-$HOME/.vnc/xstartup}"
 
+echo "Note: TurboVNC 3.3+ prefers -wm / ~/.vnc/turbovncserver.conf over xstartup."
+
 case "${profile}" in
   icewm)
     template="${TEMPLATE_DIR}/xstartup.icewm"

@@ -58,10 +58,15 @@ Direction:
 - package it as RPM(s)
 - reuse reproducible RPM workflow patterns from `sway-rpm/` and `wlroots-rpm/`
 
-## Session Startup Contract
+## Session Selection Contract (TurboVNC 3.3+)
 
-For `~/.vnc/xstartup`:
+Preferred control point:
 
-- `exec` exactly one session command
-- bootstrap D-Bus session for desktop components
-- force X11 environment variables where needed
+- TurboVNC `wm` option via `-wm <name>` or `~/.vnc/turbovncserver.conf`
+- per-user config line: `$wm="icewm";` (or `"gnome"`)
+
+Behavior to account for:
+
+- if `gnome.desktop` is present and no WM is specified, TurboVNC defaults to GNOME
+- changing config does not alter already-running sessions
+- restart sessions to apply WM changes
