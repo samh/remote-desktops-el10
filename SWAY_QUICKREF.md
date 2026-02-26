@@ -14,7 +14,7 @@ This is a practical reference for your headless Sway + wayvnc session.
 These work in your current config:
 
 - `Alt+Return`: Open terminal
-- `Alt+d`: Run app launcher (if installed)
+- `Alt+d`: Run app launcher (`dmenu-wl_run` if installed)
 - `Alt+Shift+r`: Reload Sway config
 - `Alt+Shift+e`: Exit Sway session
 - `Alt+h/j/k/l`: Focus left/down/up/right
@@ -121,4 +121,9 @@ Super key bindings do not work in VNC:
 Panel missing or empty:
 
 - Re-apply template files: `./scripts/apply-sway-config.sh`
+- Reload sway: `swaymsg reload`
+
+Launcher says "No menu launcher found":
+
+- Install one: `sudo dnf install -y dmenu-wayland`
 - Reload sway: `swaymsg reload`

@@ -65,8 +65,10 @@ sudo REMOTE_USER=remotevnc \
 The setup script installs:
 
 - `~/.config/sway/config` from `remote-session/sway.config`
+- `~/.config/sway/sway-status.sh` from `remote-session/sway-status.sh`
 - `~/.config/wayvnc/config` with TLS + auth enabled
 - `~/.config/systemd/user/sway-headless.service`
+- `dmenu-wayland` (best-effort) for `Alt+d`/`Super+d` launcher support
 
 and enables `sway-headless.service` in the remote user's systemd user manager.
 

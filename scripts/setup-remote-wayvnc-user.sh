@@ -8,6 +8,7 @@ fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TEMPLATE_DIR="${ROOT_DIR}/remote-session"
+SWAY_STATUS_SRC="${TEMPLATE_DIR}/sway-status.sh"
 
 REMOTE_USER="${REMOTE_USER:-remotevnc}"
 WAYVNC_BIND_ADDRESS="${WAYVNC_BIND_ADDRESS:-0.0.0.0}"
@@ -21,6 +22,13 @@ for bin in sway wayvnc openssl loginctl systemctl runuser; do
     exit 1
   fi
 done
+
+if ! command -v dmenu-wl_run >/dev/null 2>&1; then
+  echo "Installing dmenu-wayland for app launcher support..."
+  if ! dnf -y install dmenu-wayland; then
+    echo "Warning: failed to install dmenu-wayland; Alt+d/Super+d launcher may not work." >&2
+  fi
+fi
 
 if ! id -u "${REMOTE_USER}" >/dev/null 2>&1; then
   useradd --create-home --shell /bin/bash "${REMOTE_USER}"
@@ -44,6 +52,10 @@ install -d -m 0700 "${REMOTE_HOME}/.config/systemd/user"
 
 install -m 0644 "${TEMPLATE_DIR}/sway.config" \
   "${REMOTE_HOME}/.config/sway/config"
+if [[ -f "${SWAY_STATUS_SRC}" ]]; then
+  install -m 0755 "${SWAY_STATUS_SRC}" \
+    "${REMOTE_HOME}/.config/sway/sway-status.sh"
+fi
 install -m 0644 "${TEMPLATE_DIR}/sway-headless.service" \
   "${REMOTE_HOME}/.config/systemd/user/sway-headless.service"
 
