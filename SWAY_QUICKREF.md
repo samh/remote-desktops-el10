@@ -5,6 +5,7 @@ This is a practical reference for your headless Sway + wayvnc session.
 ## Current Config Files
 
 - Live user config: `~/.config/sway/config`
+- Live status script: `~/.config/sway/sway-status.sh`
 - wayvnc config: `~/.config/wayvnc/config`
 - User service: `~/.config/systemd/user/sway-headless.service`
 
@@ -116,3 +117,8 @@ Super key bindings do not work in VNC:
 
 - Use `F9` / `F10` fallback keys.
 - Or enable keyboard grab in your VNC viewer.
+
+Panel missing or empty:
+
+- Re-apply template files: `./scripts/apply-sway-config.sh`
+- Reload sway: `swaymsg reload`
