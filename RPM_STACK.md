@@ -70,6 +70,12 @@ The setup script installs:
 
 and enables `sway-headless.service` in the remote user's systemd user manager.
 
+To apply the tracked Sway config template to your current user and reload Sway:
+
+```bash
+make apply-sway-config
+```
+
 ## Outputs
 
 - wlroots RPMs: `wlroots-rpm/rpmbuild/RPMS`

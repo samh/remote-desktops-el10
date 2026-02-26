@@ -1,6 +1,6 @@
 # Sway Quick Reference (This Setup)
 
-This is a minimal reference for your headless Sway + wayvnc session.
+This is a practical reference for your headless Sway + wayvnc session.
 
 ## Current Config Files
 
@@ -13,10 +13,18 @@ This is a minimal reference for your headless Sway + wayvnc session.
 These work in your current config:
 
 - `Alt+Return`: Open terminal
+- `Alt+d`: Run app launcher (if installed)
 - `Alt+Shift+r`: Reload Sway config
 - `Alt+Shift+e`: Exit Sway session
 - `Alt+h/j/k/l`: Focus left/down/up/right
 - `Alt+Shift+h/j/k/l`: Move container left/down/up/right
+- `Super+r`: Enter resize mode (`h/j/k/l` or arrows, `Enter`/`Esc` to exit)
+- `Super+b` / `Super+v`: Horizontal / vertical split
+- `Super+s` / `Super+w` / `Super+e`: Stacking / tabbed / split layout
+- `Super+f`: Fullscreen toggle
+- `Super+Shift+space`: Floating toggle
+- `Super+1..0`: Switch workspace 1..10
+- `Super+Shift+1..0`: Move current window to workspace 1..10
 - `F1`: Focus left container
 - `F2`: Focus right container
 - `Shift+F1`: Move current container left
@@ -38,6 +46,7 @@ These work in your current config:
 Also configured (may require keyboard grab in VNC):
 
 - `Super+Enter`: Open terminal
+- `Super+d`: Launcher
 - `Super+Shift+r`: Reload config
 - `Super+Shift+e`: Exit session
 

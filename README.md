@@ -30,6 +30,7 @@ Will it work well with icewm from EPEL?
 Should we try to build another WM/desktop from source?
 
 # To Do
+- [ ] More complete Sway setup (panel, launcher)
 - [ ] Create a personal COPR for any packages I build to make them easier
   to install
 - [ ] Try building labwm (if it seems worthwhile to continue trying wayvnc)
