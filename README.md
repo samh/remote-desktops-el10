@@ -33,68 +33,12 @@ Openbox?
 (also need some kind of panel, launcher)
 
 ## Minimal Openbox Stack (fedpkg + mock)
-This repo now includes a simple Openbox-oriented build flow based on Fedora
-RPM sources, `fedpkg srpm`, and `mock --rebuild`.
+See:
 
-The initial minimal package set is:
-
-- `openbox`
-- `obconf`
-- `lxappearance`
-- `pcmanfm`
-- `jgmenu`
-- `dunst`
-- `lxpanel`
-
-Manifest:
-
-- `openbox-stack/packages.yaml`
-
-Source checkouts (as submodules):
-
-- `fedora-rpms/<package>`
-
-Build/install helpers:
-
-- `scripts/openbox-stack-sync-sources.sh`
-- `scripts/openbox-stack-build.sh`
-- `scripts/openbox-stack-install-built.sh`
-- `scripts/openbox-stack-write-turbovnc-conf.sh`
-
-Typical flow:
-
-```bash
-make openbox-stack-sync
-make openbox-stack-build
-make openbox-stack-install-dry-run
-make openbox-stack-install
-make openbox-stack-conf-turbovnc
-```
-
-One-step sync + build:
-
-```bash
-make openbox-stack-build-sync
-```
-
-Build behavior notes:
-
-- `make openbox-stack-build` is incremental and skips packages that already
-  have built RPMs under `openbox-stack/out/rpms/<package>/`.
-- To force rebuild everything:
-  `./scripts/openbox-stack-build.sh --force-rebuild`
-- Later package builds can consume earlier locally built RPMs (for example
-  `obconf` using `openbox-devel`) via a temporary local mock repo generated
-  from `openbox-stack/out/rpms`.
-
-Defaults:
-
-- Fedora branch: `f43` (per-package in `packages.yaml`)
-- Mock target: `epel-10-x86_64`
-
-To use a custom fork/branch for any package, edit that package's `url` and
-`branch` in `openbox-stack/packages.yaml`, then re-run
-`make openbox-stack-sync`.
+- `openbox-stack/README.md` for package set, workflow, and phased add-later
+  packages.
+- `openbox-stack/packages.yaml` for the current manifest used by
+  `make openbox-stack-build`.
 
 # To Do
 - [x] More complete Sway setup (panel, launcher)

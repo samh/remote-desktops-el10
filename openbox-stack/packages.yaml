@@ -5,18 +5,6 @@ packages:
   - name: obconf
     url: https://src.fedoraproject.org/rpms/obconf.git
     branch: f43
-  - name: lxappearance
-    url: https://src.fedoraproject.org/rpms/lxappearance.git
-    branch: f43
-  - name: pcmanfm
-    url: https://src.fedoraproject.org/rpms/pcmanfm.git
-    branch: f43
-  - name: jgmenu
-    url: https://src.fedoraproject.org/rpms/jgmenu.git
-    branch: f43
   - name: dunst
     url: https://src.fedoraproject.org/rpms/dunst.git
-    branch: f43
-  - name: lxpanel
-    url: https://src.fedoraproject.org/rpms/lxpanel.git
     branch: f43

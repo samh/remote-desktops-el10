@@ -6,10 +6,6 @@
 	path = fedora-rpms/obconf
 	url = https://src.fedoraproject.org/rpms/obconf.git
 	branch = f43
-[submodule "fedora-rpms/lxappearance"]
-	path = fedora-rpms/lxappearance
-	url = https://src.fedoraproject.org/rpms/lxappearance.git
-	branch = f43
 [submodule "fedora-rpms/pcmanfm"]
 	path = fedora-rpms/pcmanfm
 	url = https://src.fedoraproject.org/rpms/pcmanfm.git
