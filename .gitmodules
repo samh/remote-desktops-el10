@@ -1,0 +1,28 @@
+[submodule "fedora-rpms/openbox"]
+	path = fedora-rpms/openbox
+	url = https://src.fedoraproject.org/rpms/openbox.git
+	branch = f43
+[submodule "fedora-rpms/obconf"]
+	path = fedora-rpms/obconf
+	url = https://src.fedoraproject.org/rpms/obconf.git
+	branch = f43
+[submodule "fedora-rpms/lxappearance"]
+	path = fedora-rpms/lxappearance
+	url = https://src.fedoraproject.org/rpms/lxappearance.git
+	branch = f43
+[submodule "fedora-rpms/pcmanfm"]
+	path = fedora-rpms/pcmanfm
+	url = https://src.fedoraproject.org/rpms/pcmanfm.git
+	branch = f43
+[submodule "fedora-rpms/jgmenu"]
+	path = fedora-rpms/jgmenu
+	url = https://src.fedoraproject.org/rpms/jgmenu.git
+	branch = f43
+[submodule "fedora-rpms/dunst"]
+	path = fedora-rpms/dunst
+	url = https://src.fedoraproject.org/rpms/dunst.git
+	branch = f43
+[submodule "fedora-rpms/lxpanel"]
+	path = fedora-rpms/lxpanel
+	url = https://src.fedoraproject.org/rpms/lxpanel.git
+	branch = f43

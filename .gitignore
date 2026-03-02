@@ -1,0 +1,8 @@
+/dnf-list*.txt
+
+# Local build outputs from the Openbox stack workflow
+/openbox-stack/out/
+/fedora-rpms/*/*.src.rpm
+
+# Legacy local checkout used before submodule workflow
+/openbox/
