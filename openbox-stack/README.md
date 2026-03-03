@@ -19,7 +19,6 @@ Default packages in `packages.yaml`:
   - What it is: lightweight notification daemon (`notify-send` popups).
   - Why include: desktop apps can show alerts (copy complete, errors, reminders).
   - Why skip: if you want the absolute smallest stack and do not need popups.
-
 This is intentionally small so the first successful bootstrap is quick and easy
 to debug.
 
@@ -27,11 +26,38 @@ to debug.
 
 To consider:
 
-- plank (dock)
-- polybar (panel)
-- jgmenu ("simple, independent and contemporary-looking X11 menu")
-- rofi (launcher)
+- lxpanel - classic LXDE panel/taskbar
+  - EL10 build note: current `lxpanel` chain failed in `epel-10-x86_64` due
+    missing build deps (`pkgconfig(keybinder)`, `pkgconfig(libwnck-1.0)`) plus
+    bootstrap loop (`menu-cache` requires `pkgconfig(libfm-extra)`, and `libfm`
+    requires `pkgconfig(libmenu-cache)`).
+- xfce4-panel - XFCE panel/taskbar
+  - EL10 build note: current Fedora build needs a broader XFCE base
+    (`exo-devel`, `garcon-devel`, `libxfce4ui-devel`,
+    `libxfce4windowing-devel`, `xfce4-dev-tools`, `xfconf-devel`), so this is
+    also a large dependency chain.
+- plank - dock; does not replace a classic taskbar/panel
+  - EL10 build note: Fedora `plank` spec failed in `epel-10-x86_64` mock
+    without extra dependencies: `pkgconfig(granite) >= 5.4.0` and
+    `pkgconfig(libbamf3) >= 0.4.0`.
+    `granite` is the elementary OS GTK helper/widget library, and `bamf`
+    (libbamf3) maps windows to desktop applications.
+- polybar - status panel only; doesn't display minimized applications
+- jgmenu - "simple, independent and contemporary-looking X11 menu"
+- rofi - launcher
 
+Given the above, the next candidate for "taskbar with minimized windows" is
+`tint2` via a fresh RPM spec, since it is typically lighter than LX/XFCE panel
+stacks.
+
+Local tint2 packaging in this repo:
+
+- Spec: `openbox-stack/tint2-rpm/tint2.spec` (no submodule)
+- Build SRPM: `make -C openbox-stack tint2-srpm`
+- Build RPMs: `make -C openbox-stack tint2-rpm`
+- Install preview: `make -C openbox-stack tint2-install-dry-run`
+- Install: `make -C openbox-stack tint2-install`
+- Output: `openbox-stack/out/tint2/`
 
 If you want a fuller desktop later (panel/launcher/file manager), add these
 packages back in `packages.yaml`:
@@ -42,8 +68,12 @@ packages back in `packages.yaml`:
   - Why skip: unnecessary unless you add packages that depend on it.
 - `libfm`
   - What it is: file-management library used by PCManFM/LXPanel plugins.
-  - Why include: needed for file-manager/panel integration in the LX stack.
+  - Why include: needed for file-manager/panel integration in LX stack.
   - Why skip: unnecessary for pure Openbox + basic tools.
+- `lxpanel`
+  - What it is: panel/taskbar for LXDE/Openbox.
+  - Why include: gives task list, tray area, launcher integration.
+  - Why skip: dependency-heavy on EL10 right now.
 - `jgmenu`
   - What it is: application launcher/menu for lightweight WMs.
   - Why include: fast app launcher with simple integration in Openbox/lxpanel.
@@ -52,10 +82,6 @@ packages back in `packages.yaml`:
   - What it is: lightweight file manager.
   - Why include: practical GUI file browsing and desktop file operations.
   - Why skip: if CLI file management is sufficient on remote systems.
-- `lxpanel`
-  - What it is: panel/taskbar for LXDE/Openbox.
-  - Why include: gives task list, tray area, launcher integration.
-  - Why skip: adds more dependencies; optional for very minimal setups.
 - `lxappearance`
   - What it is: GTK theme/icon/font settings GUI.
   - Why include: convenient visual theme tuning.
@@ -66,9 +92,9 @@ Suggested order when re-adding:
 
 1. `menu-cache`
 2. `libfm`
-3. `jgmenu`
-4. `pcmanfm`
-5. `lxpanel`
+3. `lxpanel`
+4. `jgmenu`
+5. `pcmanfm`
 6. `lxappearance` (optional)
 
 `menu-cache` and `libfm` are useful provider packages for the LX stack, and are

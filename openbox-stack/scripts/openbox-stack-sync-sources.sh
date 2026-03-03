@@ -130,8 +130,9 @@ for entry in "${entries[@]}"; do
   fi
 
   git -C "${abs_path}" fetch --all --prune
+  git -C "${abs_path}" fetch origin "${branch}"
   git -C "${abs_path}" checkout "${branch}"
-  git -C "${abs_path}" pull --ff-only origin "${branch}"
+  git -C "${abs_path}" merge --ff-only "origin/${branch}"
 done
 
 echo "Submodule sync complete."

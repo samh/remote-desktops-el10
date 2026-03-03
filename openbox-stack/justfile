@@ -12,6 +12,10 @@ sync:
 build:
     @./scripts/openbox-stack-build.sh
 
+# sync sources, then build
+build-sync: sync
+    @./scripts/openbox-stack-build.sh
+
 # preview Openbox stack RPM install list
 install-dry-run:
     @./scripts/openbox-stack-install-built.sh --dry-run
@@ -23,6 +27,22 @@ install:
 # write ~/.vnc/turbovncserver.conf with wm=openbox
 conf-turbovnc:
     @./scripts/openbox-stack-write-turbovnc-conf.sh
+
+# build local tint2 SRPM from openbox-stack/tint2-rpm/tint2.spec
+tint2-srpm:
+    @./scripts/openbox-stack-build-tint2.sh --srpm-only
+
+# build local tint2 RPMs with mock
+tint2-rpm:
+    @./scripts/openbox-stack-build-tint2.sh
+
+# preview tint2 RPM install list
+tint2-install-dry-run:
+    @./scripts/openbox-stack-install-built.sh --out ./out/tint2/rpm --dry-run
+
+# install locally built tint2 RPMs
+tint2-install:
+    @./scripts/openbox-stack-install-built.sh --out ./out/tint2/rpm
 
 # sync, build, and install
 all: sync build install
