@@ -93,6 +93,12 @@ make openbox-stack-install-dry-run
 make openbox-stack-install
 ```
 
+Non-interactive install (passes `-y` to `dnf`):
+
+```bash
+./scripts/openbox-stack-install-built.sh --yes
+```
+
 Write TurboVNC WM config (`$wm="openbox"`):
 
 ```bash

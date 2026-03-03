@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUT_ROOT="${ROOT_DIR}/openbox-stack/out/rpms"
 dry_run=0
+assume_yes=0
 
 usage() {
   cat <<'EOF'
@@ -12,6 +13,7 @@ Usage: openbox-stack-install-built.sh [options]
 Options:
   --out <path>   RPM output root (default: openbox-stack/out/rpms)
   --dry-run      Print selected RPMs only
+  --yes          Pass -y to dnf (non-interactive install)
   -h, --help     Show this help
 EOF
 }
@@ -24,6 +26,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --dry-run)
       dry_run=1
+      shift
+      ;;
+    --yes)
+      assume_yes=1
       shift
       ;;
     -h|--help)
@@ -50,6 +56,7 @@ mapfile -t install_rpms < <(
     ! -name '*debuginfo*' \
     ! -name '*debugsource*' \
     ! -name '*-devel-*.rpm' \
+    ! -name 'openbox-kde-*.rpm' \
     | sort
 )
 
@@ -73,4 +80,9 @@ else
   dnf_cmd=(sudo dnf)
 fi
 
-"${dnf_cmd[@]}" -y --disablerepo='TurboVNC*' install "${install_rpms[@]}"
+if [[ "${assume_yes}" -eq 1 ]]; then
+  dnf_cmd+=(-y)
+fi
+
+set -x
+"${dnf_cmd[@]}" install "${install_rpms[@]}"
