@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PACKAGES_FILE="${ROOT_DIR}/openbox-stack/packages.yaml"
-SOURCES_ROOT="${ROOT_DIR}/fedora-rpms"
-OUT_ROOT="${ROOT_DIR}/openbox-stack/out"
+STACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_DIR="$(cd "${STACK_DIR}/.." && pwd)"
+PACKAGES_FILE="${STACK_DIR}/packages.yaml"
+SOURCES_ROOT="${REPO_DIR}/fedora-rpms"
+OUT_ROOT="${STACK_DIR}/out"
 MOCK_TARGET="epel-10-x86_64"
 CONTINUE_ON_ERROR=0
 FORCE_REBUILD=0
@@ -16,7 +17,7 @@ Usage: openbox-stack-build.sh [options]
 
 Options:
   --packages <path>       Path to packages.yaml (default: openbox-stack/packages.yaml)
-  --root <path>           Source checkout root (default: fedora-rpms)
+  --root <path>           Source checkout root (default: ../fedora-rpms from openbox-stack)
   --out <path>            Build output root (default: openbox-stack/out)
   --mock-target <target>  Mock target (default: epel-10-x86_64)
   --continue-on-error     Continue with next package if a build fails
@@ -132,7 +133,7 @@ for pkg in "${packages[@]}"; do
   pkg_dir="${SOURCES_ROOT}/${pkg}"
   if [[ ! -d "${pkg_dir}" ]] || ! git -C "${pkg_dir}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     echo "Missing source repo for ${pkg}: ${pkg_dir}" >&2
-    echo "Run: ./scripts/openbox-stack-sync-sources.sh" >&2
+    echo "Run: make -C openbox-stack sync" >&2
     if [[ "${CONTINUE_ON_ERROR}" -eq 1 ]]; then
       failures+=("${pkg}:missing-source")
       continue

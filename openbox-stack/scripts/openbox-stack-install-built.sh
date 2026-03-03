@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-OUT_ROOT="${ROOT_DIR}/openbox-stack/out/rpms"
+STACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+OUT_ROOT="${STACK_DIR}/out/rpms"
 dry_run=0
 assume_yes=0
 
@@ -46,7 +46,7 @@ done
 
 if [[ ! -d "${OUT_ROOT}" ]]; then
   echo "RPM output directory not found: ${OUT_ROOT}" >&2
-  echo "Run: ./scripts/openbox-stack-build.sh" >&2
+  echo "Run: make -C openbox-stack build" >&2
   exit 1
 fi
 
@@ -84,5 +84,4 @@ if [[ "${assume_yes}" -eq 1 ]]; then
   dnf_cmd+=(-y)
 fi
 
-set -x
-"${dnf_cmd[@]}" install "${install_rpms[@]}"
+"${dnf_cmd[@]}" --disablerepo='TurboVNC*' install "${install_rpms[@]}"

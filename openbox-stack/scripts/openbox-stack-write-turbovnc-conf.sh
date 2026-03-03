@@ -5,7 +5,7 @@ output="${1:-$HOME/.vnc/turbovncserver.conf}"
 mkdir -p "$(dirname "${output}")"
 
 cat > "${output}" <<'EOF'
-# Managed by scripts/openbox-stack-write-turbovnc-conf.sh
+# Managed by openbox-stack/scripts/openbox-stack-write-turbovnc-conf.sh
 $wm="openbox";
 EOF
 

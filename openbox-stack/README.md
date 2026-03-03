@@ -25,6 +25,14 @@ to debug.
 
 ## Add-Later Packages
 
+To consider:
+
+- plank (dock)
+- polybar (panel)
+- jgmenu ("simple, independent and contemporary-looking X11 menu")
+- rofi (launcher)
+
+
 If you want a fuller desktop later (panel/launcher/file manager), add these
 packages back in `packages.yaml`:
 
@@ -71,45 +79,46 @@ often needed before the panel/launcher/file-manager builds resolve in mock.
 Sync/update package source submodules:
 
 ```bash
-make openbox-stack-sync
+make -C openbox-stack sync
 ```
 
 Build package list from `packages.yaml`:
 
 ```bash
-make openbox-stack-build
+make -C openbox-stack build
 ```
 
 Sync + build:
 
 ```bash
-make openbox-stack-build-sync
+make -C openbox-stack build-sync
 ```
 
 Install built RPMs:
 
 ```bash
-make openbox-stack-install-dry-run
-make openbox-stack-install
+make -C openbox-stack install-dry-run
+make -C openbox-stack install
 ```
 
 Non-interactive install (passes `-y` to `dnf`):
 
 ```bash
-./scripts/openbox-stack-install-built.sh --yes
+./openbox-stack/scripts/openbox-stack-install-built.sh --yes
 ```
 
 Write TurboVNC WM config (`$wm="openbox"`):
 
 ```bash
-make openbox-stack-conf-turbovnc
+make -C openbox-stack conf-turbovnc
 ```
 
 ## Build Notes
 
-- `make openbox-stack-build` is incremental and skips packages already built in
+- `make -C openbox-stack build` is incremental and skips packages already built in
   `openbox-stack/out/rpms/<package>/`.
-- Use `./scripts/openbox-stack-build.sh --force-rebuild` to rebuild packages.
+- Use `./openbox-stack/scripts/openbox-stack-build.sh --force-rebuild` to rebuild
+  packages.
 - The build script creates a temporary local repo from already built RPMs so
   later builds can resolve internal dependencies (for example `obconf` needing
   `openbox-devel`).
@@ -119,5 +128,5 @@ make openbox-stack-conf-turbovnc
 Edit `url` and `branch` per package in `packages.yaml`, then run:
 
 ```bash
-make openbox-stack-sync
+make -C openbox-stack sync
 ```

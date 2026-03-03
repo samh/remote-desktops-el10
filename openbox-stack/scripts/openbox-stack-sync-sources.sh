@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PACKAGES_FILE="${ROOT_DIR}/openbox-stack/packages.yaml"
-SOURCES_ROOT="${ROOT_DIR}/fedora-rpms"
+STACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_DIR="$(cd "${STACK_DIR}/.." && pwd)"
+PACKAGES_FILE="${STACK_DIR}/packages.yaml"
+SOURCES_ROOT="${REPO_DIR}/fedora-rpms"
 DEFAULT_BRANCH=""
 
 usage() {
@@ -12,7 +13,7 @@ Usage: openbox-stack-sync-sources.sh [options]
 
 Options:
   --packages <path>     Path to packages.yaml (default: openbox-stack/packages.yaml)
-  --root <path>         Source checkout root (default: fedora-rpms)
+  --root <path>         Source checkout root (default: ../fedora-rpms from openbox-stack)
   --branch <name>       Override branch for all packages
   -h, --help            Show this help
 EOF
@@ -95,7 +96,7 @@ if [[ ! -f "${PACKAGES_FILE}" ]]; then
 fi
 
 mkdir -p "${SOURCES_ROOT}"
-cd "${ROOT_DIR}"
+cd "${REPO_DIR}"
 
 mapfile -t entries < <(parse_packages "${PACKAGES_FILE}")
 if [[ "${#entries[@]}" -eq 0 ]]; then
@@ -109,8 +110,8 @@ for entry in "${entries[@]}"; do
     branch="${DEFAULT_BRANCH}"
   fi
 
-  rel_path="$(realpath --relative-to="${ROOT_DIR}" "${SOURCES_ROOT}")/${name}"
-  abs_path="${ROOT_DIR}/${rel_path}"
+  rel_path="$(realpath --relative-to="${REPO_DIR}" "${SOURCES_ROOT}")/${name}"
+  abs_path="${REPO_DIR}/${rel_path}"
 
   if git ls-files --stage -- "${rel_path}" | awk '$1 == "160000" { found = 1 } END { exit(found ? 0 : 1) }'; then
     current_url="$(git config -f .gitmodules "submodule.${rel_path}.url" || true)"

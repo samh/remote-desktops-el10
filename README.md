@@ -38,7 +38,7 @@ See:
 - `openbox-stack/README.md` for package set, workflow, and phased add-later
   packages.
 - `openbox-stack/packages.yaml` for the current manifest used by
-  `make openbox-stack-build`.
+  `make -C openbox-stack build`.
 
 # To Do
 - [x] More complete Sway setup (panel, launcher)
