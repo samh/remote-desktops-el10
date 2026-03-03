@@ -1,0 +1,28 @@
+set shell := ["/usr/bin/bash", "-cu"]
+
+# show recipe list/help
+default:
+    @just --list --unsorted
+
+# sync Fedora RPM source submodules
+sync:
+    @./scripts/openbox-stack-sync-sources.sh
+
+# build stack packages with fedpkg+mock (no sync)
+build:
+    @./scripts/openbox-stack-build.sh
+
+# preview Openbox stack RPM install list
+install-dry-run:
+    @./scripts/openbox-stack-install-built.sh --dry-run
+
+# install locally built Openbox stack RPMs
+install:
+    @./scripts/openbox-stack-install-built.sh
+
+# write ~/.vnc/turbovncserver.conf with wm=openbox
+conf-turbovnc:
+    @./scripts/openbox-stack-write-turbovnc-conf.sh
+
+# sync, build, and install
+all: sync build install
