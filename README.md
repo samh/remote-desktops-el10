@@ -42,9 +42,17 @@ See:
 
 # To Do
 - [x] More complete Sway setup (panel, launcher)
+- [x] Try openbox
+  - [ ] Find a good panel to work with it
+    - [x] tint2
+  - [ ] jgmenu
+  - [ ] Launcher such as rofi
 - [ ] Create a personal COPR for any packages I build to make them easier
   to install
-- [ ] Try building labwm (if it seems worthwhile to continue trying wayvnc)
+- [ ] Try building labwm
+- [ ] Try building Enlightenment
+- [ ] Try building Xfce - might be good to try, as they are developing Wayland support too
+- [ ] Try building LXDE
 - [ ] Investigate tech used by 
   [LSIO Webtop 4.0](https://www.linuxserver.io/blog/webtop-4-0-wayland-is-here-engage-the-reality-engine);
   e.g. can it work without a clumsy browser in the way?
