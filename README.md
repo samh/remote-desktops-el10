@@ -51,7 +51,10 @@ See:
   to install
 - [ ] Try building labwm
 - [ ] Try building Enlightenment
-- [ ] Try building Xfce - might be good to try, as they are developing Wayland support too
+- [ ] Try building Xfce
+  - They are developing Wayland support, but based on Smithay, which as far
+    as I can tell has no remote desktop solution so far.
+  - May also be possible to use components on top of labwc
 - [ ] Try building LXDE
 - [ ] Investigate tech used by 
   [LSIO Webtop 4.0](https://www.linuxserver.io/blog/webtop-4-0-wayland-is-here-engage-the-reality-engine);

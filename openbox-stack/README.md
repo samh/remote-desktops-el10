@@ -46,18 +46,7 @@ To consider:
 - jgmenu - "simple, independent and contemporary-looking X11 menu"
 - rofi - launcher
 
-Given the above, the next candidate for "taskbar with minimized windows" is
-`tint2` via a fresh RPM spec, since it is typically lighter than LX/XFCE panel
-stacks.
-
-Local tint2 packaging in this repo:
-
-- Spec: `openbox-stack/tint2-rpm/tint2.spec` (no submodule)
-- Build SRPM: `make -C openbox-stack tint2-srpm`
-- Build RPMs: `make -C openbox-stack tint2-rpm`
-- Install preview: `make -C openbox-stack tint2-install-dry-run`
-- Install: `make -C openbox-stack tint2-install`
-- Output: `openbox-stack/out/tint2/`
+### Optional fuller desktop additions
 
 If you want a fuller desktop later (panel/launcher/file manager), add these
 packages back in `packages.yaml`:
@@ -99,6 +88,20 @@ Suggested order when re-adding:
 
 `menu-cache` and `libfm` are useful provider packages for the LX stack, and are
 often needed before the panel/launcher/file-manager builds resolve in mock.
+
+## Built Panel Option: tint2
+
+`tint2` is now available in this repo via a local RPM spec and is the current
+recommended lightweight panel/taskbar option for Openbox on EL10.
+
+Local tint2 packaging in this repo:
+
+- Spec: `openbox-stack/tint2-rpm/tint2.spec` (no submodule)
+- Build SRPM: `make -C openbox-stack tint2-srpm`
+- Build RPMs: `make -C openbox-stack tint2-rpm`
+- Install preview: `make -C openbox-stack tint2-install-dry-run`
+- Install: `make -C openbox-stack tint2-install`
+- Output: `openbox-stack/out/tint2/`
 
 ## Commands
 
