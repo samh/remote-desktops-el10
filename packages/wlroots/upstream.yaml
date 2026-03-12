@@ -1,0 +1,3 @@
+type: local-spec
+spec: wlroots.spec
+sync_into: distgit

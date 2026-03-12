@@ -7,8 +7,10 @@ if [[ "${EUID}" -ne 0 ]]; then
 fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-TEMPLATE_DIR="${ROOT_DIR}/remote-session"
-SWAY_STATUS_SRC="${TEMPLATE_DIR}/sway-status.sh"
+PROFILE_DIR="${ROOT_DIR}/profiles/sway"
+CONFIG_DIR="${PROFILE_DIR}/config/sway"
+TEMPLATE_DIR="${PROFILE_DIR}/templates"
+SWAY_STATUS_SRC="${CONFIG_DIR}/sway-status.sh"
 
 REMOTE_USER="${REMOTE_USER:-remotevnc}"
 WAYVNC_BIND_ADDRESS="${WAYVNC_BIND_ADDRESS:-0.0.0.0}"
@@ -50,7 +52,7 @@ install -d -m 0700 "${REMOTE_HOME}/.config/sway"
 install -d -m 0700 "${REMOTE_HOME}/.config/wayvnc"
 install -d -m 0700 "${REMOTE_HOME}/.config/systemd/user"
 
-install -m 0644 "${TEMPLATE_DIR}/sway.config" \
+install -m 0644 "${CONFIG_DIR}/config" \
   "${REMOTE_HOME}/.config/sway/config"
 if [[ -f "${SWAY_STATUS_SRC}" ]]; then
   install -m 0755 "${SWAY_STATUS_SRC}" \

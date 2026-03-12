@@ -1,0 +1,7 @@
+name: sway
+packages:
+  - wlroots
+  - sway
+wm: sway
+config_layout: xdg-tree
+config_source: config

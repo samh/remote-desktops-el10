@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-TOPDIR="${ROOT_DIR}/rpmbuild"
-VERSIONS_FILE="${ROOT_DIR}/versions.env"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PKG_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+DISTGIT_DIR="${PKG_DIR}/distgit"
+VERSIONS_FILE="${PKG_DIR}/versions.env"
 
 if [[ ! -f "${VERSIONS_FILE}" ]]; then
   echo "Missing ${VERSIONS_FILE}" >&2
@@ -18,8 +19,8 @@ if [[ -z "${SWAY_VERSION:-}" || -z "${SWAY_SOURCE_URL:-}" || -z "${SWAY_SOURCE_S
   exit 1
 fi
 
-mkdir -p "${TOPDIR}/SOURCES"
-tarball="${TOPDIR}/SOURCES/sway-${SWAY_VERSION}.tar.gz"
+mkdir -p "${DISTGIT_DIR}"
+tarball="${DISTGIT_DIR}/sway-${SWAY_VERSION}.tar.gz"
 
 if [[ -f "${tarball}" ]]; then
   echo "Using existing ${tarball}"

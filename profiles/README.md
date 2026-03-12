@@ -7,7 +7,7 @@ Examples:
 
 - a minimal Fluxbox session
 - an Openbox plus tint2 stack
-- a TurboVNC IceWM profile
+- a Wayland Sway session
 
 Each profile directory should hold:
 

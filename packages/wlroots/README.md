@@ -1,0 +1,7 @@
+# Wlroots package
+
+This package directory is the monorepo home for the local `wlroots` packaging
+used by the Sway profile.
+
+Pinned upstream source details live in `versions.env`, and the shared package
+builder consumes the spec from `distgit/wlroots.spec`.

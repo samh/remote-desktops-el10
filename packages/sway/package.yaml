@@ -1,0 +1,4 @@
+name: sway
+build_after:
+  - wlroots
+fetch_script: scripts/fetch-sources.sh

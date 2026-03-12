@@ -32,16 +32,19 @@ Should we try to build another WM/desktop from source?
 Openbox?
 (also need some kind of panel, launcher)
 
-## X11 Profiles
-The X11 desktop workflows now build from package trees in `packages/` and are
+## Profiles
+The desktop workflows now build from package trees in `packages/` and are
 composed by profiles in `profiles/`.
 
 Common entrypoints:
 
 - `just profile-build fluxbox`
 - `just profile-build openbox-tint2`
+- `just profile-build sway`
 - `just profile-install-config fluxbox`
+- `just profile-install-config sway`
 - `just profile-conf-turbovnc openbox-tint2`
+- `just apply-sway-config`
 
 ## Monorepo Layout
 
@@ -52,15 +55,18 @@ The repo now uses:
 - `profiles/` for desktop/session compositions and user-level config that can
   reuse subsets of packages.
 
-Current X11 packages/profiles include:
+Current packages/profiles include:
 
 - `packages/fluxbox/`
 - `packages/openbox/`
 - `packages/obconf/`
 - `packages/dunst/`
 - `packages/tint2/`
+- `packages/wlroots/`
+- `packages/sway/`
 - `profiles/fluxbox/`
 - `profiles/openbox-tint2/`
+- `profiles/sway/`
 
 # To Do
 - [x] More complete Sway setup (panel, launcher)

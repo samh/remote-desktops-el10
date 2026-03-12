@@ -6,6 +6,12 @@ default:
 bootstrap:
     @./scripts/bootstrap-host.sh
 
+apply-sway-config:
+    @./scripts/apply-sway-config.sh
+
+setup-remote-session:
+    @./scripts/setup-remote-wayvnc-user.sh
+
 package-sync package:
     @./scripts/package-sync.sh --package {{package}}
 

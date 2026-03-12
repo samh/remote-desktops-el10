@@ -15,3 +15,6 @@ The intent is that `packages/<name>/` becomes the canonical packaging location,
 while Fedora DistGit is treated as an upstream packaging source that can be
 refreshed into this repo when needed. Local build outputs now live under
 `out/packages/<name>/`.
+
+Current package trees include X11 and Wayland components such as `fluxbox`,
+`openbox`, `tint2`, `wlroots`, and `sway`.
