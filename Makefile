@@ -4,6 +4,10 @@ SHELL := /usr/bin/bash
 
 help:
 	@echo "Top-level RPM stack targets:"
+	@echo "  just profile-build fluxbox         - build the Fluxbox X11 profile"
+	@echo "  just profile-build openbox-tint2   - build the Openbox+tint2 X11 profile"
+	@echo "  just profile-install-config fluxbox - install Fluxbox user config"
+	@echo "  just profile-conf-turbovnc openbox-tint2 - write TurboVNC WM config"
 	@echo "  make wlroots-deps    - install wlroots build dependencies"
 	@echo "  make wlroots-source  - fetch/verify wlroots source"
 	@echo "  make wlroots-rpm     - build wlroots RPMs"
@@ -16,8 +20,6 @@ help:
 	@echo "  make setup-remote-session - configure headless sway+wayvnc user session (run as root)"
 	@echo "  make all             - build/install wlroots, then build sway"
 	@echo "  make all-container   - same pipeline inside an AlmaLinux container (no host sudo)"
-	@echo "  make -C openbox-stack help - Openbox stack targets"
-	@echo "  just --justfile fluxbox-stack/justfile - Fluxbox stack targets"
 
 wlroots-deps:
 	@$(MAKE) -C wlroots-rpm deps

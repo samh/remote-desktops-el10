@@ -1,0 +1,8 @@
+name: fluxbox
+packages:
+  - fluxbox
+wm: fluxbox
+config_layout: home-subdir
+config_source: config
+config_target_subdir: .fluxbox
+xstartup_template: templates/xstartup.fluxbox

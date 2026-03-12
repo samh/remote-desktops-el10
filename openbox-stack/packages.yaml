@@ -1,5 +1,0 @@
-packages:
-  - name: openbox
-  - name: obconf
-  - name: dunst
-    branch: f43

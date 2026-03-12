@@ -32,37 +32,35 @@ Should we try to build another WM/desktop from source?
 Openbox?
 (also need some kind of panel, launcher)
 
-## Minimal Openbox Stack (fedpkg + mock)
-See:
+## X11 Profiles
+The X11 desktop workflows now build from package trees in `packages/` and are
+composed by profiles in `profiles/`.
 
-- `openbox-stack/README.md` for package set, workflow, and phased add-later
-  packages.
-- `openbox-stack/packages.yaml` for the current manifest used by
-  `make -C openbox-stack build`.
+Common entrypoints:
 
-## Minimal Fluxbox Stack (fedpkg + mock)
-See:
-
-- `fluxbox-stack/README.md` for the Fluxbox-specific build, install, config,
-  and TurboVNC workflow.
-- `fluxbox-stack/packages.yaml` for the current manifest used by
-  `just --justfile fluxbox-stack/justfile build`.
+- `just profile-build fluxbox`
+- `just profile-build openbox-tint2`
+- `just profile-install-config fluxbox`
+- `just profile-conf-turbovnc openbox-tint2`
 
 ## Monorepo Layout
 
-The repo is starting to move toward:
+The repo now uses:
 
 - `packages/` for self-contained RPM source trees intended for local `mock`
   builds and future COPR builds.
 - `profiles/` for desktop/session compositions and user-level config that can
   reuse subsets of packages.
 
-Initial scaffolding is in place for:
+Current X11 packages/profiles include:
 
 - `packages/fluxbox/`
+- `packages/openbox/`
+- `packages/obconf/`
+- `packages/dunst/`
+- `packages/tint2/`
 - `profiles/fluxbox/`
-
-The active Fluxbox build flow now reads from `packages/fluxbox/distgit/`.
+- `profiles/openbox-tint2/`
 
 # To Do
 - [x] More complete Sway setup (panel, launcher)

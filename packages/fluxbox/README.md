@@ -8,8 +8,8 @@ Current state:
 - `distgit/` is a snapshot of the Fedora packaging files currently used by the
   working EL10 Fluxbox build flow.
 - `upstream.yaml` records the Fedora DistGit origin used for refreshes.
-- The active local build flow now reads from this directory rather than the
-  old `fedora-rpms/fluxbox` submodule.
+- The active local build flow now reads directly from this directory via the
+  shared package builder.
 
 Near-term intent:
 

@@ -1,0 +1,4 @@
+name: openbox
+build_after:
+install_exclude_globs:
+  - openbox-kde-*.rpm

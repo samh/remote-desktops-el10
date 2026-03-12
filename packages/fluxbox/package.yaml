@@ -1,0 +1,5 @@
+name: fluxbox
+build_after:
+fetch_script: scripts/fetch-sources.sh
+install_exclude_globs:
+  - fluxbox-pulseaudio-*.rpm

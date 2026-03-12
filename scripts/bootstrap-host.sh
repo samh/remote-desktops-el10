@@ -4,14 +4,13 @@ set -euo pipefail
 pkgs=(
   createrepo_c
   dnf-plugins-core
-  fedpkg
   git
   just
   mock
   rpmdevtools
 )
 
-echo "Installing Fluxbox stack prerequisites:"
+echo "Installing desktop packaging prerequisites:"
 printf ' - %s\n' "${pkgs[@]}"
 sudo dnf install -y "${pkgs[@]}"
 
@@ -25,3 +24,4 @@ sudo dnf repoinfo TurboVNC
 
 echo
 echo "Bootstrap complete."
+

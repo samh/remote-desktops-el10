@@ -1,0 +1,10 @@
+name: openbox-tint2
+packages:
+  - openbox
+  - obconf
+  - dunst
+  - tint2
+wm: openbox
+config_layout: xdg-tree
+config_source: config
+xstartup_template: templates/xstartup.openbox-tint2
