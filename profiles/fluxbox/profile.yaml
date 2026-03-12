@@ -1,6 +1,7 @@
 name: fluxbox
 packages:
   - fluxbox
+  - fluxbox-styles-samh
 wm: fluxbox
 config_layout: home-subdir
 config_source: config

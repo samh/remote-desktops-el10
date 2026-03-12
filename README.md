@@ -58,6 +58,7 @@ The repo now uses:
 Current packages/profiles include:
 
 - `packages/fluxbox/`
+- `packages/fluxbox-styles-samh/`
 - `packages/openbox/`
 - `packages/obconf/`
 - `packages/dunst/`

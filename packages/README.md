@@ -17,4 +17,4 @@ refreshed into this repo when needed. Local build outputs now live under
 `out/packages/<name>/`.
 
 Current package trees include X11 and Wayland components such as `fluxbox`,
-`openbox`, `tint2`, `wlroots`, and `sway`.
+`fluxbox-styles-samh`, `openbox`, `tint2`, `wlroots`, and `sway`.
