@@ -3,7 +3,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STACK_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-TEMPLATE="${STACK_DIR}/templates/xstartup.fluxbox"
+REPO_DIR="$(cd "${STACK_DIR}/.." && pwd)"
+TEMPLATE="${REPO_DIR}/profiles/fluxbox/templates/xstartup.fluxbox"
 output="${1:-$HOME/.vnc/xstartup}"
 
 echo "Note: TurboVNC 3.3+ prefers -wm / ~/.vnc/turbovncserver.conf over xstartup."

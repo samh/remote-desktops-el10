@@ -48,6 +48,20 @@ See:
 - `fluxbox-stack/packages.yaml` for the current manifest used by
   `just --justfile fluxbox-stack/justfile build`.
 
+## Monorepo Layout
+
+The repo is starting to move toward:
+
+- `packages/` for self-contained RPM source trees intended for local `mock`
+  builds and future COPR builds.
+- `profiles/` for desktop/session compositions and user-level config that can
+  reuse subsets of packages.
+
+Initial scaffolding is in place for:
+
+- `packages/fluxbox/`
+- `profiles/fluxbox/`
+
 # To Do
 - [x] More complete Sway setup (panel, launcher)
 - [x] Try openbox

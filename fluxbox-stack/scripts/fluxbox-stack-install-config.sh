@@ -2,7 +2,8 @@
 set -euo pipefail
 
 STACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-CONFIG_DIR="${STACK_DIR}/config"
+REPO_DIR="$(cd "${STACK_DIR}/.." && pwd)"
+CONFIG_DIR="${REPO_DIR}/profiles/fluxbox/config"
 TARGET_HOME="${HOME}"
 BACKUP_SUFFIX=""
 FORCE=0

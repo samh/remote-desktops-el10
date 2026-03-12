@@ -3,6 +3,9 @@
 This directory contains a minimal EL10 Fluxbox build workflow based on Fedora
 RPM packaging (`fedpkg srpm`) and `mock --rebuild`.
 
+Canonical runtime profile assets live in `profiles/fluxbox/`.
+The package-refresh transition work starts in `packages/fluxbox/`.
+
 ## Current Scope
 
 The first cut intentionally builds only:
