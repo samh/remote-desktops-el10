@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if command -v xrdb >/dev/null 2>&1 && [[ -r "${HOME}/.Xresources" ]]; then
+  xrdb -merge "${HOME}/.Xresources"
+fi
+
+if command -v xsetroot >/dev/null 2>&1; then
+  xsetroot -solid "#d9dfe7"
+fi
+
+if command -v xterm >/dev/null 2>&1; then
+  xterm -geometry 120x34+32+32 &
+fi
+
+exec fluxbox

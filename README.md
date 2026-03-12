@@ -40,6 +40,14 @@ See:
 - `openbox-stack/packages.yaml` for the current manifest used by
   `make -C openbox-stack build`.
 
+## Minimal Fluxbox Stack (fedpkg + mock)
+See:
+
+- `fluxbox-stack/README.md` for the Fluxbox-specific build, install, config,
+  and TurboVNC workflow.
+- `fluxbox-stack/packages.yaml` for the current manifest used by
+  `just --justfile fluxbox-stack/justfile build`.
+
 # To Do
 - [x] More complete Sway setup (panel, launcher)
 - [x] Try openbox

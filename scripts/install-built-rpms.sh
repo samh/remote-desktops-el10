@@ -56,4 +56,4 @@ else
   dnf_cmd=(sudo dnf)
 fi
 
-"${dnf_cmd[@]}" -y --disablerepo='TurboVNC*' install "${install_rpms[@]}"
+"${dnf_cmd[@]}" -y install "${install_rpms[@]}"

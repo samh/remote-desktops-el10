@@ -1,0 +1,8 @@
+session.screen0.toolbar.visible:       true
+session.screen0.toolbar.autoHide:      false
+session.screen0.toolbar.widthPercent:  100
+session.screen0.toolbar.tools:         prevworkspace, workspacename, nextworkspace, iconbar, systemtray, clock
+session.screen0.workspaceNames:        one,two,three,four
+session.screen0.focusModel:            ClickFocus
+session.screen0.windowMenu:            true
+session.screen0.strftimeFormat:        %a %Y-%m-%d %H:%M

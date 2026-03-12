@@ -1,0 +1,7 @@
+Mod4 Return :ExecCommand xterm
+Mod4 d :ExecCommand xterm -e bash -lc 'command -v dmenu_run >/dev/null 2>&1 && exec dmenu_run; echo dmenu_run not installed; exec bash'
+Mod4 w :ShowRootMenu
+Mod4 Tab :NextWindow
+Mod4 Shift Tab :PrevWindow
+Mod4 F4 :Close
+Control Mod1 Delete :Exit

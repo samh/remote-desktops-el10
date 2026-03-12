@@ -55,7 +55,8 @@ Container build artifacts are copied to:
 
 - The scripts use a local RPM topdir under this directory (`sway-rpm/rpmbuild`)
   so the workflow is self-contained.
-- The `deps` script disables `TurboVNC*` repos, matching your host issue.
+- The `deps` script uses the normal root-owned DNF path and should work with
+  the TurboVNC repo enabled.
 - `sway 1.11` requires `wlroots >= 0.19.0` (`< 0.20.0`).
 - If you later want exact repo snapshot reproducibility, pin a mirror/snapshot in
   DNF config and keep that alongside this directory.

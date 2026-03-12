@@ -2,16 +2,16 @@
 set -euo pipefail
 
 STACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-OUT_ROOT="${STACK_DIR}/out/rpms"
+OUT_ROOT="${STACK_DIR}/out/all-rpms"
 dry_run=0
 assume_yes=0
 
 usage() {
   cat <<'EOF'
-Usage: openbox-stack-install-built.sh [options]
+Usage: fluxbox-stack-install-built.sh [options]
 
 Options:
-  --out <path>   RPM output root (default: openbox-stack/out/rpms)
+  --out <path>   RPM output root (default: fluxbox-stack/out/all-rpms)
   --dry-run      Print selected RPMs only
   --yes          Pass -y to dnf (non-interactive install)
   -h, --help     Show this help
@@ -46,17 +46,17 @@ done
 
 if [[ ! -d "${OUT_ROOT}" ]]; then
   echo "RPM output directory not found: ${OUT_ROOT}" >&2
-  echo "Run: make -C openbox-stack build" >&2
+  echo "Run: just --justfile fluxbox-stack/justfile build" >&2
   exit 1
 fi
 
 mapfile -t install_rpms < <(
-  find "${OUT_ROOT}" -type f -name '*.rpm' \
+  find "${OUT_ROOT}" -maxdepth 1 -type f -name '*.rpm' \
     ! -name '*.src.rpm' \
     ! -name '*debuginfo*' \
     ! -name '*debugsource*' \
     ! -name '*-devel-*.rpm' \
-    ! -name 'openbox-kde-*.rpm' \
+    ! -name '*-pulseaudio-*.rpm' \
     | sort
 )
 
@@ -74,10 +74,9 @@ if [[ "${dry_run}" -eq 1 ]]; then
   exit 0
 fi
 
+dnf_cmd=(sudo dnf)
 if [[ "${EUID}" -eq 0 ]]; then
   dnf_cmd=(dnf)
-else
-  dnf_cmd=(sudo dnf)
 fi
 
 if [[ "${assume_yes}" -eq 1 ]]; then

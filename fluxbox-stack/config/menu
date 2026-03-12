@@ -1,0 +1,12 @@
+[begin] (Fluxbox)
+  [exec] (Terminal) {xterm}
+  [exec] (Reload config) {fluxbox-remote reconfig}
+  [exec] (Restart Fluxbox) {fluxbox-remote restart}
+  [separator]
+  [submenu] (System)
+    [exec] (xterm) {xterm}
+    [exec] (Top) {xterm -e top}
+  [end]
+  [separator]
+  [exit] (Exit)
+[end]

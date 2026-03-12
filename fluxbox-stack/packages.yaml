@@ -1,0 +1,4 @@
+packages:
+  - name: fluxbox
+    url: https://src.fedoraproject.org/rpms/fluxbox.git
+    branch: f43

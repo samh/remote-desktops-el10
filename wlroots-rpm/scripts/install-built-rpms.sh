@@ -14,4 +14,4 @@ fi
 
 echo "Installing local wlroots RPMs:"
 printf '  %s\n' "${rpms[@]}"
-sudo dnf -y --disablerepo='TurboVNC*' install "${rpms[@]}"
+sudo dnf -y install "${rpms[@]}"

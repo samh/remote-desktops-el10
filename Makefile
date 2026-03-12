@@ -17,6 +17,7 @@ help:
 	@echo "  make all             - build/install wlroots, then build sway"
 	@echo "  make all-container   - same pipeline inside an AlmaLinux container (no host sudo)"
 	@echo "  make -C openbox-stack help - Openbox stack targets"
+	@echo "  just --justfile fluxbox-stack/justfile - Fluxbox stack targets"
 
 wlroots-deps:
 	@$(MAKE) -C wlroots-rpm deps

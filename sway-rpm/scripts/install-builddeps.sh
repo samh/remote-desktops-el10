@@ -17,4 +17,4 @@ if [[ "${#deps[@]}" -eq 0 ]]; then
 fi
 
 echo "Installing ${#deps[@]} build dependencies from ${DEPS_FILE}"
-sudo dnf -y --disablerepo='TurboVNC*' install "${deps[@]}"
+sudo dnf -y install "${deps[@]}"

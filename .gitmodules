@@ -22,3 +22,7 @@
 	path = fedora-rpms/lxpanel
 	url = https://src.fedoraproject.org/rpms/lxpanel.git
 	branch = f43
+[submodule "fedora-rpms/fluxbox"]
+	path = fedora-rpms/fluxbox
+	url = https://src.fedoraproject.org/rpms/fluxbox.git
+	branch = f43

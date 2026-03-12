@@ -1,0 +1,38 @@
+set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
+
+# install local build prerequisites and validate the TurboVNC repo
+bootstrap:
+    @./scripts/fluxbox-stack-bootstrap.sh
+
+# sync Fedora RPM sources from packages.yaml
+sync:
+    @./scripts/fluxbox-stack-sync-sources.sh
+
+# build the configured Fluxbox stack RPMs
+build:
+    @./scripts/fluxbox-stack-build.sh
+
+# sync Fedora RPM sources, then build
+build-sync:
+    @./scripts/fluxbox-stack-sync-sources.sh
+    @./scripts/fluxbox-stack-build.sh
+
+# preview built RPMs that would be installed
+install-dry-run:
+    @./scripts/fluxbox-stack-install-built.sh --dry-run
+
+# install built RPMs
+install:
+    @./scripts/fluxbox-stack-install-built.sh
+
+# install the default Fluxbox config into the current home
+install-config:
+    @./scripts/fluxbox-stack-install-config.sh
+
+# write ~/.vnc/turbovncserver.conf with wm=fluxbox
+conf-turbovnc:
+    @./scripts/fluxbox-stack-write-turbovnc-conf.sh
+
+# copy or hard-link all RPMs into out/all-rpms
+all-rpms:
+    @./scripts/fluxbox-stack-build.sh --refresh-common-output

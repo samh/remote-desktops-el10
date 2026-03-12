@@ -43,4 +43,5 @@ Artifacts:
 ## Notes
 
 - This uses a local topdir (`wlroots-rpm/rpmbuild`) to keep builds self-contained.
-- `deps` disables broken `TurboVNC*` repos on your host.
+- `deps` uses the normal root-owned DNF path and should work with the TurboVNC
+  repo enabled.
