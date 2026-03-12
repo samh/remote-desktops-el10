@@ -70,6 +70,8 @@ Current packages/profiles include:
 - `profiles/sway/`
 
 ## COPR builds
+COPR project: <https://copr.fedorainfracloud.org/coprs/samuelh/lightweight-desktops/>
+
 Package trees under `packages/` are the units that map cleanly to COPR builds.
 The usual flow is:
 
@@ -93,7 +95,7 @@ Useful reference:
     - [x] tint2
   - [ ] jgmenu
   - [ ] Launcher such as rofi
-- [ ] Create a personal COPR for any packages I build to make them easier
+- [x] Create a personal COPR for any packages I build to make them easier
   to install
 - [ ] Try building labwm
 - [ ] Try building Enlightenment
