@@ -17,4 +17,4 @@ if [[ ! -f "${DISTGIT_DIR}/fluxbox.spec" ]]; then
 fi
 
 cd "${DISTGIT_DIR}"
-spectool -g -R fluxbox.spec
+spectool -g -C "${DISTGIT_DIR}" fluxbox.spec

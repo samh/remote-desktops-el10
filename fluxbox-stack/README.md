@@ -1,7 +1,7 @@
 # Fluxbox Stack (fedpkg + mock)
 
-This directory contains a minimal EL10 Fluxbox build workflow based on Fedora
-RPM packaging (`fedpkg srpm`) and `mock --rebuild`.
+This directory contains a minimal EL10 Fluxbox build workflow based on the
+monorepo package tree in `packages/fluxbox/` and `mock`.
 
 Canonical runtime profile assets live in `profiles/fluxbox/`.
 The package-refresh transition work starts in `packages/fluxbox/`.
@@ -14,6 +14,10 @@ The first cut intentionally builds only:
   - What it is: the window manager itself.
   - Why include: it is actively packaged in Fedora and builds the core
     TurboVNC-compatible session.
+
+The active build source is:
+
+- `packages/fluxbox/distgit/`
 
 Not included in v1:
 
@@ -32,7 +36,7 @@ cd fluxbox-stack
 just bootstrap
 ```
 
-Sync Fedora RPM sources:
+Refresh package packaging from Fedora DistGit:
 
 ```bash
 just sync
@@ -80,6 +84,7 @@ just conf-turbovnc
 ## Output Layout
 
 - `out/logs/<package>/` stores `fedpkg` and `mock` logs.
+- `out/srpm-result/<package>/` stores SRPM output from `mock --buildsrpm`.
 - `out/mock-result/<package>/` stores raw `mock` output.
 - `out/rpms/<package>/` stores package-specific RPM results.
 - `out/all-rpms/` contains every RPM in one place, using hard links when
@@ -87,10 +92,10 @@ just conf-turbovnc
 
 ## TurboVNC Repo Notes
 
-This stack does not disable the `TurboVNC` repo. Instead, the bootstrap path
-uses `sudo dnf makecache --refresh` and `sudo dnf repoinfo TurboVNC` so the
-repo is validated through the root-owned DNF cache and trust flow that this
-host expects.
+This stack does not disable the `TurboVNC` repo. The bootstrap path uses
+`sudo dnf makecache --refresh` and `sudo dnf repoinfo TurboVNC` so the repo is
+validated through the root-owned DNF cache and trust flow that this host
+expects.
 
 ## TurboVNC Session Config
 

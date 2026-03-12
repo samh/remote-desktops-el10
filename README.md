@@ -62,6 +62,8 @@ Initial scaffolding is in place for:
 - `packages/fluxbox/`
 - `profiles/fluxbox/`
 
+The active Fluxbox build flow now reads from `packages/fluxbox/distgit/`.
+
 # To Do
 - [x] More complete Sway setup (panel, launcher)
 - [x] Try openbox

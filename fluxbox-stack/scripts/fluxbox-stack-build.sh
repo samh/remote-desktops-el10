@@ -4,7 +4,7 @@ set -euo pipefail
 STACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 REPO_DIR="$(cd "${STACK_DIR}/.." && pwd)"
 PACKAGES_FILE="${STACK_DIR}/packages.yaml"
-SOURCES_ROOT="${REPO_DIR}/fedora-rpms"
+SOURCES_ROOT="${REPO_DIR}/packages"
 OUT_ROOT="${STACK_DIR}/out"
 MOCK_TARGET="epel-10-x86_64"
 CONTINUE_ON_ERROR=0
@@ -18,7 +18,7 @@ Usage: fluxbox-stack-build.sh [options]
 
 Options:
   --packages <path>       Path to packages.yaml (default: fluxbox-stack/packages.yaml)
-  --root <path>           Source checkout root (default: ../fedora-rpms from fluxbox-stack)
+  --root <path>           Package source root (default: ../packages from fluxbox-stack)
   --out <path>            Build output root (default: fluxbox-stack/out)
   --mock-target <target>  Mock target (default: epel-10-x86_64)
   --continue-on-error     Continue with next package if a build fails
@@ -109,6 +109,11 @@ mock_prefix() {
   printf 'sudo\n'
 }
 
+find_spec_file() {
+  local dir="$1"
+  find "${dir}" -maxdepth 1 -type f -name '*.spec' | sort | head -n1
+}
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --packages)
@@ -160,7 +165,7 @@ if [[ ! -f "${PACKAGES_FILE}" ]]; then
   exit 1
 fi
 
-mkdir -p "${OUT_ROOT}/logs" "${OUT_ROOT}/mock-result" "${OUT_ROOT}/rpms"
+mkdir -p "${OUT_ROOT}/logs" "${OUT_ROOT}/srpm-result" "${OUT_ROOT}/mock-result" "${OUT_ROOT}/rpms"
 if [[ -z "${LOCAL_REPO_DIR}" ]]; then
   LOCAL_REPO_DIR="${OUT_ROOT}/localrepo"
 fi
@@ -191,8 +196,13 @@ mapfile -t mock_sudo < <(mock_prefix)
 
 for pkg in "${packages[@]}"; do
   pkg_dir="${SOURCES_ROOT}/${pkg}"
-  if [[ ! -d "${pkg_dir}" ]] || ! git -C "${pkg_dir}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    echo "Missing source repo for ${pkg}: ${pkg_dir}" >&2
+  distgit_dir="${pkg_dir}/distgit"
+  if [[ ! -d "${distgit_dir}" ]]; then
+    distgit_dir="${pkg_dir}"
+  fi
+
+  if [[ ! -d "${distgit_dir}" ]]; then
+    echo "Missing package tree for ${pkg}: ${distgit_dir}" >&2
     echo "Run: just --justfile fluxbox-stack/justfile sync" >&2
     if [[ "${CONTINUE_ON_ERROR}" -eq 1 ]]; then
       failures+=("${pkg}:missing-source")
@@ -201,10 +211,21 @@ for pkg in "${packages[@]}"; do
     exit 1
   fi
 
+  spec_path="$(find_spec_file "${distgit_dir}")"
+  if [[ -z "${spec_path}" ]]; then
+    echo "No spec file found for ${pkg} under ${distgit_dir}" >&2
+    if [[ "${CONTINUE_ON_ERROR}" -eq 1 ]]; then
+      failures+=("${pkg}:missing-spec")
+      continue
+    fi
+    exit 1
+  fi
+
   pkg_log_dir="${OUT_ROOT}/logs/${pkg}"
+  pkg_srpm_dir="${OUT_ROOT}/srpm-result/${pkg}"
   pkg_result_dir="${OUT_ROOT}/mock-result/${pkg}"
   pkg_rpm_dir="${OUT_ROOT}/rpms/${pkg}"
-  mkdir -p "${pkg_log_dir}" "${pkg_result_dir}" "${pkg_rpm_dir}"
+  mkdir -p "${pkg_log_dir}" "${pkg_srpm_dir}" "${pkg_result_dir}" "${pkg_rpm_dir}"
 
   if [[ "${FORCE_REBUILD}" -eq 0 ]]; then
     mapfile -t existing_pkg_rpms < <(find "${pkg_rpm_dir}" -maxdepth 1 -type f -name '*.rpm' ! -name '*.src.rpm' | sort)
@@ -214,12 +235,22 @@ for pkg in "${packages[@]}"; do
     fi
   fi
 
-  echo "==> [${pkg}] fedpkg srpm"
-  if ! (
-    cd "${pkg_dir}"
-    fedpkg srpm
-  ) >"${pkg_log_dir}/fedpkg-srpm.log" 2>&1; then
-    echo "SRPM generation failed for ${pkg}. See ${pkg_log_dir}/fedpkg-srpm.log" >&2
+  if [[ -x "${pkg_dir}/scripts/fetch-sources.sh" ]]; then
+    echo "==> [${pkg}] fetch sources"
+    if ! "${pkg_dir}/scripts/fetch-sources.sh" >"${pkg_log_dir}/fetch-sources.log" 2>&1; then
+      echo "Source fetch failed for ${pkg}. See ${pkg_log_dir}/fetch-sources.log" >&2
+      if [[ "${CONTINUE_ON_ERROR}" -eq 1 ]]; then
+        failures+=("${pkg}:fetch-sources")
+        continue
+      fi
+      exit 1
+    fi
+  fi
+
+  echo "==> [${pkg}] mock buildsrpm (${MOCK_TARGET})"
+  buildsrpm_cmd=("${mock_sudo[@]}" mock --root "${MOCK_TARGET}" --buildsrpm --spec "${spec_path}" --sources "${distgit_dir}" --resultdir "${pkg_srpm_dir}")
+  if ! "${buildsrpm_cmd[@]}" >"${pkg_log_dir}/mock-buildsrpm.log" 2>&1; then
+    echo "SRPM generation failed for ${pkg}. See ${pkg_log_dir}/mock-buildsrpm.log" >&2
     if [[ "${CONTINUE_ON_ERROR}" -eq 1 ]]; then
       failures+=("${pkg}:srpm")
       continue
@@ -227,9 +258,9 @@ for pkg in "${packages[@]}"; do
     exit 1
   fi
 
-  srpm_path="$(find "${pkg_dir}" -maxdepth 1 -type f -name '*.src.rpm' -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2-)"
+  srpm_path="$(find "${pkg_srpm_dir}" -maxdepth 1 -type f -name '*.src.rpm' -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2-)"
   if [[ -z "${srpm_path}" ]]; then
-    echo "No SRPM found for ${pkg} in ${pkg_dir}" >&2
+    echo "No SRPM found for ${pkg} in ${pkg_srpm_dir}" >&2
     if [[ "${CONTINUE_ON_ERROR}" -eq 1 ]]; then
       failures+=("${pkg}:no-srpm")
       continue
