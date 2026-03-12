@@ -1,17 +1,18 @@
 SHELL := /usr/bin/bash
 
-.PHONY: help sync build build-sync install install-dry-run conf-turbovnc tint2-srpm tint2-rpm tint2-install tint2-install-dry-run all
+.PHONY: help sync build build-sync install install-config install-dry-run conf-turbovnc tint2-srpm tint2-rpm tint2-install tint2-install-dry-run all
 
 help:
 	@echo "Openbox stack targets:"
-	@echo "  sync          - sync Fedora RPM source submodules"
-	@echo "  build         - build stack packages with fedpkg+mock (no sync)"
+	@echo "  sync          - refresh package snapshots from Fedora DistGit"
+	@echo "  build         - build stack packages with package trees + mock (no sync)"
 	@echo "  build-sync    - sync sources, then build"
 	@echo "  install       - install locally built Openbox stack RPMs"
+	@echo "  install-config - install the Openbox+tint2 profile config"
 	@echo "  install-dry-run - preview Openbox stack RPM install list"
 	@echo "  conf-turbovnc - write ~/.vnc/turbovncserver.conf with wm=openbox"
-	@echo "  tint2-srpm    - build local tint2 SRPM from openbox-stack/tint2-rpm/tint2.spec"
-	@echo "  tint2-rpm     - build local tint2 RPMs with mock"
+	@echo "  tint2-srpm    - build local tint2 SRPM from packages/tint2/distgit/tint2.spec"
+	@echo "  tint2-rpm     - build local tint2 RPMs from the local package tree with mock"
 	@echo "  tint2-install-dry-run - preview tint2 RPM install list"
 	@echo "  tint2-install - install locally built tint2 RPMs"
 	@echo "  all           - sync, build, and install"
@@ -27,6 +28,9 @@ build-sync: sync
 
 install:
 	@./scripts/openbox-stack-install-built.sh
+
+install-config:
+	@./scripts/openbox-stack-install-config.sh
 
 install-dry-run:
 	@./scripts/openbox-stack-install-built.sh --dry-run

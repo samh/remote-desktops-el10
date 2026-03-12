@@ -1,7 +1,10 @@
-# Openbox Stack (fedpkg + mock)
+# Openbox Stack (packages + mock)
 
-This directory contains a minimal EL10 Openbox build workflow based on Fedora
-RPM packaging (`fedpkg srpm`) and `mock --rebuild`.
+This directory contains a minimal EL10 Openbox build workflow based on the
+monorepo package trees in `packages/` and `mock`.
+
+The profile composition for the lightweight desktop target starts in
+`profiles/openbox-tint2/`.
 
 ## Current Minimal Set
 
@@ -90,12 +93,12 @@ often needed before the panel/launcher/file-manager builds resolve in mock.
 
 ## Built Panel Option: tint2
 
-`tint2` is now available in this repo via a local RPM spec and is the current
+`tint2` is now available in this repo via a local package tree and is the current
 recommended lightweight panel/taskbar option for Openbox on EL10.
 
 Local tint2 packaging in this repo:
 
-- Spec: `openbox-stack/tint2-rpm/tint2.spec` (no submodule)
+- Spec: `packages/tint2/distgit/tint2.spec`
 - Build SRPM: `make -C openbox-stack tint2-srpm`
 - Build RPMs: `make -C openbox-stack tint2-rpm`
 - Install preview: `make -C openbox-stack tint2-install-dry-run`
@@ -104,7 +107,7 @@ Local tint2 packaging in this repo:
 
 ## Commands
 
-Sync/update package source submodules:
+Refresh package snapshots from Fedora DistGit:
 
 ```bash
 make -C openbox-stack sync
@@ -141,6 +144,12 @@ Write TurboVNC WM config (`$wm="openbox"`):
 make -C openbox-stack conf-turbovnc
 ```
 
+Install the profile config into `~/.config/openbox` and `~/.config/tint2`:
+
+```bash
+make -C openbox-stack install-config
+```
+
 ## Build Notes
 
 - `make -C openbox-stack build` is incremental and skips packages already built in
@@ -150,10 +159,14 @@ make -C openbox-stack conf-turbovnc
 - The build script creates a temporary local repo from already built RPMs so
   later builds can resolve internal dependencies (for example `obconf` needing
   `openbox-devel`).
+- `openbox`, `obconf`, and `dunst` now build from `packages/<name>/distgit/`.
+- `tint2` now builds from `packages/tint2/distgit/tint2.spec`.
+- `profiles/openbox-tint2/` provides a minimal Openbox session config with
+  `tint2` and `dunst` autostarted for remote-desktop use.
 
 ## Custom Forks / Branches
 
-Edit `url` and `branch` per package in `packages.yaml`, then run:
+Edit `packages/<name>/upstream.yaml` or use `--branch`, then run:
 
 ```bash
 make -C openbox-stack sync

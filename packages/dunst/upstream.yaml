@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/dunst.git
+branch: f43
+spec: dunst.spec
+sync_into: distgit

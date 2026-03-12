@@ -4,11 +4,11 @@ set shell := ["/usr/bin/bash", "-cu"]
 default:
     @just --list --unsorted
 
-# sync Fedora RPM source submodules
+# refresh package snapshots from Fedora DistGit
 sync:
     @./scripts/openbox-stack-sync-sources.sh
 
-# build stack packages with fedpkg+mock (no sync)
+# build stack packages with package trees + mock (no sync)
 build:
     @./scripts/openbox-stack-build.sh
 
@@ -24,15 +24,19 @@ install-dry-run:
 install:
     @./scripts/openbox-stack-install-built.sh
 
+# install profile config under ~/.config/openbox and ~/.config/tint2
+install-config:
+    @./scripts/openbox-stack-install-config.sh
+
 # write ~/.vnc/turbovncserver.conf with wm=openbox
 conf-turbovnc:
     @./scripts/openbox-stack-write-turbovnc-conf.sh
 
-# build local tint2 SRPM from openbox-stack/tint2-rpm/tint2.spec
+# build local tint2 SRPM from packages/tint2/distgit/tint2.spec
 tint2-srpm:
     @./scripts/openbox-stack-build-tint2.sh --srpm-only
 
-# build local tint2 RPMs with mock
+# build local tint2 RPMs from the local package tree with mock
 tint2-rpm:
     @./scripts/openbox-stack-build-tint2.sh
 

@@ -2,13 +2,23 @@
 set -euo pipefail
 
 STACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SPEC_FILE="${STACK_DIR}/tint2-rpm/tint2.spec"
+REPO_DIR="$(cd "${STACK_DIR}/.." && pwd)"
+PKG_DIR="${REPO_DIR}/packages/tint2"
+SPEC_FILE="${PKG_DIR}/distgit/tint2.spec"
 OUT_ROOT="${STACK_DIR}/out/tint2"
-SOURCES_DIR="${OUT_ROOT}/sources"
+SOURCES_DIR="${PKG_DIR}/distgit"
 SRPM_DIR="${OUT_ROOT}/srpm"
 RPM_DIR="${OUT_ROOT}/rpm"
 MOCK_TARGET="epel-10-x86_64"
 SRPM_ONLY=0
+
+mock_prefix() {
+  if [[ "${EUID}" -eq 0 ]] || id -nG "${USER}" | tr ' ' '\n' | grep -qx mock; then
+    return 0
+  fi
+
+  printf 'sudo\n'
+}
 
 usage() {
   cat <<'EOF'
@@ -56,27 +66,18 @@ if [[ ! -f "${SPEC_FILE}" ]]; then
   exit 1
 fi
 
-mkdir -p "${SOURCES_DIR}" "${SRPM_DIR}" "${RPM_DIR}"
+mkdir -p "${SRPM_DIR}" "${RPM_DIR}"
+mapfile -t mock_sudo < <(mock_prefix)
 
-source_url="$(rpmspec -P "${SPEC_FILE}" | awk '
-  /^Source0:[[:space:]]*/ && url == "" { url = $2 }
-  END { if (url != "") print url }
-')"
-if [[ -z "${source_url}" ]]; then
-  echo "Unable to resolve Source0 from ${SPEC_FILE}" >&2
+if [[ ! -x "${PKG_DIR}/scripts/fetch-sources.sh" ]]; then
+  echo "Missing source fetch helper: ${PKG_DIR}/scripts/fetch-sources.sh" >&2
   exit 1
 fi
 
-source_file="${SOURCES_DIR}/$(basename "${source_url}")"
-if [[ ! -f "${source_file}" ]]; then
-  echo "Downloading source: ${source_url}"
-  curl -fL --retry 3 --retry-delay 2 -o "${source_file}" "${source_url}"
-else
-  echo "Using cached source: ${source_file}"
-fi
+"${PKG_DIR}/scripts/fetch-sources.sh"
 
 echo "Building tint2 SRPM (${MOCK_TARGET})"
-mock --root "${MOCK_TARGET}" --buildsrpm \
+"${mock_sudo[@]}" mock --root "${MOCK_TARGET}" --buildsrpm \
   --spec "${SPEC_FILE}" \
   --sources "${SOURCES_DIR}" \
   --resultdir "${SRPM_DIR}"
@@ -93,7 +94,7 @@ if [[ "${SRPM_ONLY}" -eq 1 ]]; then
 fi
 
 echo "Building tint2 RPMs (${MOCK_TARGET})"
-mock --root "${MOCK_TARGET}" --rebuild "${srpm_path}" --resultdir "${RPM_DIR}"
+"${mock_sudo[@]}" mock --root "${MOCK_TARGET}" --rebuild "${srpm_path}" --resultdir "${RPM_DIR}"
 
 echo "RPM output:"
 find "${RPM_DIR}" -maxdepth 1 -type f -name '*.rpm' | sort

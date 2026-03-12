@@ -1,0 +1,50 @@
+rounded = 6
+border_width = 1
+padding = 6 8 6
+background_color = #20252b 90
+border_color = #64748b 60
+
+rounded = 4
+border_width = 0
+padding = 6 10 6
+background_color = #111827 85
+border_color = #111827 0
+text_color = #f8fafc 100
+
+panel_items = TSC
+panel_size = 100% 32
+panel_margin = 0 0
+panel_padding = 4 4 4
+panel_background_id = 1
+wm_menu = 1
+panel_position = bottom center horizontal
+panel_layer = top
+panel_monitor = all
+panel_shrink = 0
+autohide = 0
+strut_policy = minimum
+
+taskbar_mode = single_desktop
+taskbar_padding = 0 0 6
+taskbar_background_id = 0
+
+task_text = 1
+task_centered = 1
+task_padding = 6 4 6
+task_background_id = 0
+task_active_background_id = 1
+task_icon = 1
+task_thumbnail = 0
+
+systray_padding = 4 4 4
+systray_background_id = 0
+
+clock_font = Sans 10
+clock_format = %a %b %d  %H:%M
+clock_padding = 6 0
+clock_background_id = 0
+
+tooltip_show_timeout = 0.2
+tooltip_hide_timeout = 0.1
+tooltip_padding = 6 6
+tooltip_background_id = 1

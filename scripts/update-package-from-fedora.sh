@@ -96,7 +96,7 @@ fi
 
 SOURCE_DIR="${FEDORA_ROOT}/${PACKAGE_NAME}"
 TEMP_DIR=""
-if [[ ! -d "${SOURCE_DIR}" ]] || ! git -C "${SOURCE_DIR}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+if [[ ! -d "${SOURCE_DIR}" ]] || [[ ! -e "${SOURCE_DIR}/.git" ]] || ! git -C "${SOURCE_DIR}" remote get-url origin >/dev/null 2>&1; then
   TEMP_DIR="$(mktemp -d)"
   SOURCE_DIR="${TEMP_DIR}/${PACKAGE_NAME}"
   git clone --depth 1 --branch "${upstream_branch}" "${upstream_url}" "${SOURCE_DIR}" >/dev/null

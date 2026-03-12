@@ -1,10 +1,5 @@
 packages:
   - name: openbox
-    url: https://src.fedoraproject.org/rpms/openbox.git
-    branch: f43
   - name: obconf
-    url: https://src.fedoraproject.org/rpms/obconf.git
-    branch: f43
   - name: dunst
-    url: https://src.fedoraproject.org/rpms/dunst.git
     branch: f43

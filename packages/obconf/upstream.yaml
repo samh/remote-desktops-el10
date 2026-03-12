@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/obconf.git
+branch: f43
+spec: obconf.spec
+sync_into: distgit
