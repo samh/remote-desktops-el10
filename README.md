@@ -73,11 +73,13 @@ Package trees under `packages/` are the units that map cleanly to COPR builds.
 The usual flow is:
 
 1. Generate the SRPM locally, for example `just package-srpm sway`.
-2. Create a COPR project/chroot if needed, for example:
-   `copr-cli create yourname/remote-desktops-el10 --chroot epel-10-x86_64`
-3. Submit the generated SRPM from `out/packages/<name>/srpm-result/`, for
+2. Submit the generated SRPM from `out/packages/<name>/srpm-result/`, for
    example:
-   `copr-cli build yourname/remote-desktops-el10 out/packages/sway/srpm-result/sway-1.11-1.el10.src.rpm`
+   `copr-cli build samuelh/lightweight-desktops out/packages/sway/srpm-result/sway-1.11-1.el10.src.rpm`
+
+`just package-srpm <name>` prints the requested SRPM path on stdout, so this
+also works:
+`copr-cli build samuelh/lightweight-desktops "$(just package-srpm sway)"`
 
 Useful reference:
 

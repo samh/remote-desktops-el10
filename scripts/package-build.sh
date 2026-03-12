@@ -13,6 +13,26 @@ REFRESH_LOCAL_REPO_ONLY=0
 SRPM_ONLY=0
 LOCAL_REPO_DIR=""
 declare -a requested_packages=()
+declare -a requested_srpm_paths=()
+
+log_info() {
+  if [[ "${SRPM_ONLY}" -eq 1 ]]; then
+    printf '%s\n' "$*" >&2
+  else
+    printf '%s\n' "$*"
+  fi
+}
+
+is_requested_package() {
+  local needle="$1"
+  local package_name
+  for package_name in "${requested_packages[@]}"; do
+    if [[ "${package_name}" == "${needle}" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
 
 usage() {
   cat <<'EOF'
@@ -101,9 +121,9 @@ fi
 
 mkdir -p "${OUT_ROOT}/packages"
 
-if [[ "${REFRESH_LOCAL_REPO_ONLY}" -eq 1 ]]; then
+  if [[ "${REFRESH_LOCAL_REPO_ONLY}" -eq 1 ]]; then
   refresh_local_repo "${OUT_ROOT}" "${LOCAL_REPO_DIR}" || true
-  echo "Refreshed ${LOCAL_REPO_DIR}."
+  log_info "Refreshed ${LOCAL_REPO_DIR}."
   exit 0
 fi
 
@@ -154,19 +174,23 @@ for package_name in "${build_order[@]}"; do
     if [[ "${SRPM_ONLY}" -eq 1 ]]; then
       mapfile -t existing_srpms < <(find "${pkg_srpm_dir}" -maxdepth 1 -type f -name '*.src.rpm' | sort)
       if [[ "${#existing_srpms[@]}" -gt 0 ]]; then
-        echo "==> [${package_name}] SRPM already built, skipping (use --force-rebuild to rebuild)"
+        srpm_path="${existing_srpms[$((${#existing_srpms[@]} - 1))]}"
+        if is_requested_package "${package_name}"; then
+          requested_srpm_paths+=("${srpm_path}")
+        fi
+        log_info "==> [${package_name}] SRPM already built, skipping (use --force-rebuild to rebuild)"
         continue
       fi
     else
       mapfile -t existing_pkg_rpms < <(find "${pkg_rpm_dir}" -maxdepth 1 -type f -name '*.rpm' ! -name '*.src.rpm' | sort)
       if [[ "${#existing_pkg_rpms[@]}" -gt 0 ]]; then
-        echo "==> [${package_name}] already built, skipping (use --force-rebuild to rebuild)"
+        log_info "==> [${package_name}] already built, skipping (use --force-rebuild to rebuild)"
         continue
       fi
     fi
   fi
 
-  echo "==> [${package_name}] fetch sources"
+  log_info "==> [${package_name}] fetch sources"
   if ! fetch_sources "${package_name}" "${spec_path}" >"${pkg_log_dir}/fetch-sources.log" 2>&1; then
     echo "Source fetch failed for ${package_name}. See ${pkg_log_dir}/fetch-sources.log" >&2
     if [[ "${CONTINUE_ON_ERROR}" -eq 1 ]]; then
@@ -176,7 +200,7 @@ for package_name in "${build_order[@]}"; do
     exit 1
   fi
 
-  echo "==> [${package_name}] mock buildsrpm (${MOCK_TARGET})"
+  log_info "==> [${package_name}] mock buildsrpm (${MOCK_TARGET})"
   buildsrpm_cmd=("${mock_sudo[@]}" mock --root "${MOCK_TARGET}" --buildsrpm --spec "${spec_path}" --sources "${distgit_dir}" --resultdir "${pkg_srpm_dir}")
   if ! "${buildsrpm_cmd[@]}" >"${pkg_log_dir}/mock-buildsrpm.log" 2>&1; then
     echo "SRPM generation failed for ${package_name}. See ${pkg_log_dir}/mock-buildsrpm.log" >&2
@@ -198,11 +222,14 @@ for package_name in "${build_order[@]}"; do
   fi
 
   if [[ "${SRPM_ONLY}" -eq 1 ]]; then
-    echo "==> [${package_name}] SRPM ready: ${srpm_path}"
+    if is_requested_package "${package_name}"; then
+      requested_srpm_paths+=("${srpm_path}")
+    fi
+    log_info "==> [${package_name}] SRPM ready: ${srpm_path}"
     continue
   fi
 
-  echo "==> [${package_name}] mock rebuild (${MOCK_TARGET})"
+  log_info "==> [${package_name}] mock rebuild (${MOCK_TARGET})"
   mock_cmd=("${mock_sudo[@]}" mock --root "${MOCK_TARGET}" --rebuild "${srpm_path}" --resultdir "${pkg_result_dir}")
   if [[ "${local_repo_ready}" -eq 1 ]]; then
     mock_cmd+=(--addrepo "file://${LOCAL_REPO_DIR}")
@@ -237,15 +264,18 @@ for package_name in "${build_order[@]}"; do
 done
 
 if [[ "${#failures[@]}" -gt 0 ]]; then
-  echo "Build completed with failures:" >&2
+  printf '%s\n' "Build completed with failures:" >&2
   printf '  %s\n' "${failures[@]}" >&2
   exit 1
 fi
 
 if [[ "${SRPM_ONLY}" -eq 1 ]]; then
-  echo "SRPM generation completed successfully."
-  echo "SRPM output root: ${OUT_ROOT}/packages"
+  log_info "SRPM generation completed successfully."
+  log_info "SRPM output root: ${OUT_ROOT}/packages"
+  if [[ "${#requested_srpm_paths[@]}" -gt 0 ]]; then
+    printf '%s\n' "${requested_srpm_paths[@]}"
+  fi
 else
-  echo "Build completed successfully."
-  echo "Package output root: ${OUT_ROOT}/packages"
+  log_info "Build completed successfully."
+  log_info "Package output root: ${OUT_ROOT}/packages"
 fi
