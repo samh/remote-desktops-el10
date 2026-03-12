@@ -9,8 +9,6 @@ Default packages in `packages.yaml`:
 
 - `openbox`
   - What it is: the window manager itself.
-  - Why include: required for the Openbox session.
-  - Why skip: not applicable; this is the core component.
 - `obconf`
   - What it is: GUI editor for Openbox settings.
   - Why include: easier than hand-editing XML for theme/border/focus changes.
@@ -19,6 +17,7 @@ Default packages in `packages.yaml`:
   - What it is: lightweight notification daemon (`notify-send` popups).
   - Why include: desktop apps can show alerts (copy complete, errors, reminders).
   - Why skip: if you want the absolute smallest stack and do not need popups.
+
 This is intentionally small so the first successful bootstrap is quick and easy
 to debug.
 
