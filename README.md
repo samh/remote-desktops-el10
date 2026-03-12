@@ -68,6 +68,21 @@ Current packages/profiles include:
 - `profiles/openbox-tint2/`
 - `profiles/sway/`
 
+## COPR builds
+Package trees under `packages/` are the units that map cleanly to COPR builds.
+The usual flow is:
+
+1. Build the package locally, for example `just package-build sway`.
+2. Create a COPR project/chroot if needed, for example:
+   `copr-cli create yourname/remote-desktops-el10 --chroot epel-10-x86_64`
+3. Submit the generated SRPM from `out/packages/<name>/srpm-result/`, for
+   example:
+   `copr-cli build yourname/remote-desktops-el10 out/packages/sway/srpm-result/sway-1.11-1.el10.src.rpm`
+
+Useful reference:
+
+- COPR user documentation: <https://docs.pagure.org/copr.copr/user_documentation.html>
+
 # To Do
 - [x] More complete Sway setup (panel, launcher)
 - [x] Try openbox
