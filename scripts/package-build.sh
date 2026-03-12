@@ -10,6 +10,7 @@ MOCK_TARGET="epel-10-x86_64"
 CONTINUE_ON_ERROR=0
 FORCE_REBUILD=0
 REFRESH_LOCAL_REPO_ONLY=0
+SRPM_ONLY=0
 LOCAL_REPO_DIR=""
 declare -a requested_packages=()
 
@@ -23,6 +24,7 @@ Options:
   --mock-target <target> Mock target (default: epel-10-x86_64)
   --continue-on-error    Continue with later packages if a build fails
   --force-rebuild        Rebuild packages even if binary RPMs already exist
+  --srpm-only           Stop after generating SRPMs
   --refresh-localrepo    Rebuild out/localrepo only
   --local-repo <path>    Local repo path passed to mock via --addrepo
   -h, --help             Show this help
@@ -67,6 +69,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --force-rebuild)
       FORCE_REBUILD=1
+      shift
+      ;;
+    --srpm-only)
+      SRPM_ONLY=1
       shift
       ;;
     --refresh-localrepo)
@@ -145,10 +151,18 @@ for package_name in "${build_order[@]}"; do
   fi
 
   if [[ "${FORCE_REBUILD}" -eq 0 ]]; then
-    mapfile -t existing_pkg_rpms < <(find "${pkg_rpm_dir}" -maxdepth 1 -type f -name '*.rpm' ! -name '*.src.rpm' | sort)
-    if [[ "${#existing_pkg_rpms[@]}" -gt 0 ]]; then
-      echo "==> [${package_name}] already built, skipping (use --force-rebuild to rebuild)"
-      continue
+    if [[ "${SRPM_ONLY}" -eq 1 ]]; then
+      mapfile -t existing_srpms < <(find "${pkg_srpm_dir}" -maxdepth 1 -type f -name '*.src.rpm' | sort)
+      if [[ "${#existing_srpms[@]}" -gt 0 ]]; then
+        echo "==> [${package_name}] SRPM already built, skipping (use --force-rebuild to rebuild)"
+        continue
+      fi
+    else
+      mapfile -t existing_pkg_rpms < <(find "${pkg_rpm_dir}" -maxdepth 1 -type f -name '*.rpm' ! -name '*.src.rpm' | sort)
+      if [[ "${#existing_pkg_rpms[@]}" -gt 0 ]]; then
+        echo "==> [${package_name}] already built, skipping (use --force-rebuild to rebuild)"
+        continue
+      fi
     fi
   fi
 
@@ -181,6 +195,11 @@ for package_name in "${build_order[@]}"; do
       continue
     fi
     exit 1
+  fi
+
+  if [[ "${SRPM_ONLY}" -eq 1 ]]; then
+    echo "==> [${package_name}] SRPM ready: ${srpm_path}"
+    continue
   fi
 
   echo "==> [${package_name}] mock rebuild (${MOCK_TARGET})"
@@ -223,6 +242,10 @@ if [[ "${#failures[@]}" -gt 0 ]]; then
   exit 1
 fi
 
-echo "Build completed successfully."
-echo "Package output root: ${OUT_ROOT}/packages"
-
+if [[ "${SRPM_ONLY}" -eq 1 ]]; then
+  echo "SRPM generation completed successfully."
+  echo "SRPM output root: ${OUT_ROOT}/packages"
+else
+  echo "Build completed successfully."
+  echo "Package output root: ${OUT_ROOT}/packages"
+fi

@@ -18,6 +18,9 @@ package-sync package:
 package-build package:
     @./scripts/package-build.sh --package {{package}}
 
+package-srpm package:
+    @./scripts/package-build.sh --package {{package}} --srpm-only
+
 package-build-many *packages:
     @args=(); for pkg in {{packages}}; do args+=("--package" "$$pkg"); done; ./scripts/package-build.sh "$${args[@]}"
 

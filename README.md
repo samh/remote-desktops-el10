@@ -72,7 +72,7 @@ Current packages/profiles include:
 Package trees under `packages/` are the units that map cleanly to COPR builds.
 The usual flow is:
 
-1. Build the package locally, for example `just package-build sway`.
+1. Generate the SRPM locally, for example `just package-srpm sway`.
 2. Create a COPR project/chroot if needed, for example:
    `copr-cli create yourname/remote-desktops-el10 --chroot epel-10-x86_64`
 3. Submit the generated SRPM from `out/packages/<name>/srpm-result/`, for
