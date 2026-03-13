@@ -1,7 +1,7 @@
-# Remote Desktops for el10
-This repo contains experiments (mostly using Codex CLI) on setting up remote
-desktop sessions on RHEL10, CentOS Stream 10, AlmaLinux 10, or other variants
-(currently testing on AlmaLinux 10).
+# Lightweight Desktops for el10
+This repo contains packages for various lightweight desktops / window managers
+and related components for RHEL10, CentOS Stream 10, AlmaLinux 10, or other
+variants (currently testing on AlmaLinux 10).
 
 I was unsatisfied with the GNOME Remote Desktop (RDP) that is officially
 supported (requires two usernames/passwords to log in, does not auto-resize),
@@ -9,15 +9,76 @@ so I wanted to see what else was possible.
 
 For reference, I am connecting from client software running on Windows 11.
 
-## wayvnc
+## Installation (COPR)
+
+These instructions are for end users installing prebuilt RPMs from COPR on
+RHEL 10, CentOS Stream 10, AlmaLinux 10, or similar EL10 systems.
+
+*As an alternative to using the COPR, you can clone this repo and build*
+*everything locally.*
+
+*For instructions on uploading packages to build, see [COPR Builds](#copr-builds).*
+
+First, enable the COPR repository [samuelh/lightweight-desktops](https://copr.fedorainfracloud.org/coprs/samuelh/lightweight-desktops/):
+
+```bash
+sudo dnf copr enable samuelh/lightweight-desktops
+```
+
+Then install one or more of the currently available desktop options.
+
+### Fluxbox
+
+Install the packages:
+
+```bash
+sudo dnf install fluxbox
+```
+
+Some optional light styles:
+```bash
+sudo dnf install fluxbox-styles-samh
+```
+
+To use with TurboVNC, set in `turbovncserver.conf`:
+```perl
+$wm = "fluxbox";
+```
+
+### Openbox
+
+Install the packages:
+
+```bash
+sudo dnf install openbox obconf dunst
+```
+
+Install the `tint2` panel if desired:
+```bash
+sudo dnf install tint2
+```
+
+To use with TurboVNC, set in `turbovncserver.conf`:
+```perl
+$wm = "openbox";
+```
+
+## Remote Desktop Options
+### wayvnc
 I've been wanting to try wayvnc for a while to see how well it works.
 Confusingly, although wayvnc is in EPEL, there don't appear to be any
 compositors that work with it available, so I had to build one from
 source.
 
-## TurboVNC
-This has been my go-to viewer for several years, but it is X11 and
-understandably doesn't work well with GNOME.
+Current options in this repo:
+
+- sway
+
+### TurboVNC
+This has been my go-to viewer for several years, but it is X11-only.
+It *does* appear to work with the RHEL10 version of GNOME, but it
+is sluggish, and the TurboVNC documentation reports many issues with
+GNOME 3+.
 
 A quick note on why it's my go-to viewer:
 
@@ -25,12 +86,12 @@ A quick note on why it's my go-to viewer:
 - Auto-resizing & clipboard sharing just work
 - It's fast
 
-Will it work well with icewm from EPEL?
-*It works, but I'm not really satisfied with icewm.*
+As of 2026-02, the other options in EPEL10 are:
 
-Should we try to build another WM/desktop from source?
-Openbox?
-(also need some kind of panel, launcher)
+- KDE Plasma: Plasma is great but moving toward Wayland-only;
+  it likely works in this version, but I got dependency errors
+  last time I tried to install it
+- icewm: works fine, but I'm not really satisfied with it personally
 
 ## Profiles
 The desktop workflows now build from package trees in `packages/` and are
@@ -84,7 +145,7 @@ Current packages/profiles include:
 - `profiles/openbox-tint2/`
 - `profiles/sway/`
 
-## COPR builds
+## COPR Builds
 COPR project: <https://copr.fedorainfracloud.org/coprs/samuelh/lightweight-desktops/>
 
 Package trees under `packages/` are the units that map cleanly to COPR builds.
@@ -113,7 +174,8 @@ Useful reference:
 - [x] Create a personal COPR for any packages I build to make them easier
   to install
 - [x] Try building LXDE
-- [ ] Try building labwm
+- [ ] Try building LXQt
+- [ ] Try building labwc
 - [ ] Try building Enlightenment
 - [ ] Try building Xfce
   - They are developing Wayland support, but based on Smithay, which as far
