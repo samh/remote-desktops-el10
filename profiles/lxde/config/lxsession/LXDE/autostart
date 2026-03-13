@@ -1,2 +1,3 @@
-# LXDE user autostart is intentionally empty here.
-# The packaged LXDE session defaults should remain authoritative.
+@lxpanel --profile LXDE
+@pcmanfm --desktop --profile LXDE
+@xscreensaver -no-splash
