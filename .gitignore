@@ -1,7 +1,7 @@
+*.src.rpm
+*.tar.*
+
 /dnf-list*.txt
 
 # Shared local build outputs
 /out/
-
-# Legacy local checkout used before submodule workflow
-/openbox/
