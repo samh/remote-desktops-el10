@@ -17,7 +17,7 @@
      type = menu
      Config {
 -        image=@prefix@/share/lxde/images/lxde-icon.png
-+        image=@prefix@/share/icons/Bluecurve/24x24/apps/icon-panel-menu.png
++        image=@prefix@/share/lxpanel/images/my-computer.png
          system {
          }
          separator {

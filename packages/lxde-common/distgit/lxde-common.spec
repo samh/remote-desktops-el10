@@ -93,6 +93,7 @@ Requires:		/usr/bin/xprop
 # Use vendor's artwork
 Requires:		system-logos
 Requires:		desktop-backgrounds-compat
+Requires:		gnome-icon-theme-legacy
 
 BuildArch:		noarch
 
