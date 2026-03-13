@@ -38,7 +38,7 @@
 
 Name:			lxde-common
 Version:		%{main_version}%{git_ver_rpm}
-Release:		5%{?dist}
+Release:		6%{?dist}
 Summary:		Default configuration files for LXDE
 
 # SPDX confirmed
@@ -85,6 +85,7 @@ Requires:		lxsession >= 0.4.0
 Requires:		lxpanel
 Requires:		pcmanfm
 Requires:		openbox
+Requires:		lxterminal
 
 Requires:		xdg-utils
 Requires:		xorg-x11-xinit
@@ -238,6 +239,9 @@ install -cpm 0644 %{SOURCE11} %{buildroot}%{_sysconfdir}/xdg/lxsession/libfm/lib
 
 
 %changelog
+* Fri Mar 13 2026 Sam H <samh@noreply> - 0.99.3-6
+- Require lxterminal so the LXDE profile includes a terminal emulator
+
 * Mon Aug 18 2025 Mamoru TASAKA <mtasaka@fedoraproject.org> - 0.99.3-5
 - Change openbox window border style on F-43+
 

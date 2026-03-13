@@ -201,6 +201,7 @@ for package_name in "${build_order[@]}"; do
   fi
 
   log_info "==> [${package_name}] mock buildsrpm (${MOCK_TARGET})"
+  rm -f "${pkg_srpm_dir}"/*.rpm
   buildsrpm_cmd=("${mock_sudo[@]}" mock --root "${MOCK_TARGET}" --buildsrpm --spec "${spec_path}" --sources "${distgit_dir}" --resultdir "${pkg_srpm_dir}")
   if ! "${buildsrpm_cmd[@]}" >"${pkg_log_dir}/mock-buildsrpm.log" 2>&1; then
     echo "SRPM generation failed for ${package_name}. See ${pkg_log_dir}/mock-buildsrpm.log" >&2
@@ -230,6 +231,7 @@ for package_name in "${build_order[@]}"; do
   fi
 
   log_info "==> [${package_name}] mock rebuild (${MOCK_TARGET})"
+  rm -f "${pkg_result_dir}"/*.rpm
   mock_cmd=("${mock_sudo[@]}" mock --root "${MOCK_TARGET}" --rebuild "${srpm_path}" --resultdir "${pkg_result_dir}")
   if [[ "${local_repo_ready}" -eq 1 ]]; then
     mock_cmd+=(--addrepo "file://${LOCAL_REPO_DIR}")

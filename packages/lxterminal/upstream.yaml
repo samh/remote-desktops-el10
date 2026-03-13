@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/lxterminal.git
+branch: f43
+spec: lxterminal.spec
+sync_into: distgit

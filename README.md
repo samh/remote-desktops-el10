@@ -70,6 +70,7 @@ Current packages/profiles include:
 - `packages/lxmenu-data/`
 - `packages/lxpanel/`
 - `packages/lxsession/`
+- `packages/lxterminal/`
 - `packages/menu-cache/`
 - `packages/openbox/`
 - `packages/obconf/`

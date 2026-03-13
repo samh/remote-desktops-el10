@@ -6,6 +6,7 @@ packages:
   - menu-cache
   - libfm
   - pcmanfm
+  - lxterminal
   - lxde-common
   - lxsession
   - keybinder
