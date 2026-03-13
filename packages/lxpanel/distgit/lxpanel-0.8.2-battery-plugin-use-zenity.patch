@@ -1,0 +1,11 @@
+--- lxpanel-0.8.2/plugins/batt/batt.c.zenity	2016-02-21 07:27:59.000000000 +0900
++++ lxpanel-0.8.2/plugins/batt/batt.c	2016-03-01 16:15:20.750107299 +0900
+@@ -641,7 +641,7 @@ static gboolean applyConfig(gpointer use
+         gtk_widget_hide(user_data);
+ 
+     if (b->alarmCommand == NULL)
+-        b->alarmCommand = g_strconcat("xmessage ", _("Battery low"), NULL);
++        b->alarmCommand = g_strconcat("zenity --warning --text='", _("Battery low"), "'", NULL);
+ 
+     /* update tooltip */
+     set_tooltip_text(b);

@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/lxmenu-data.git
+branch: f43
+spec: lxmenu-data.spec
+sync_into: distgit

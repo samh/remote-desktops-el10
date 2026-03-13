@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/menu-cache.git
+branch: f43
+spec: menu-cache.spec
+sync_into: distgit

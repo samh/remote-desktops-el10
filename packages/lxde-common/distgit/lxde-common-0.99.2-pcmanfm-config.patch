@@ -1,0 +1,11 @@
+--- lxde-common-0.99.2/pcmanfm/pcmanfm.conf.in.orig	2016-11-25 15:28:56.374114804 +0900
++++ lxde-common-0.99.2/pcmanfm/pcmanfm.conf.in	2016-11-25 15:29:42.295596207 +0900
+@@ -4,7 +4,7 @@
+ 
+ [desktop]
+ wallpaper_mode=crop
+-wallpaper=@prefix@/share/lxde/wallpapers/lxde_blue.jpg
++wallpaper=@prefix@/share/backgrounds/images/default.png
+ desktop_bg=#000000
+ desktop_fg=#ffffff
+ desktop_shadow=#000000

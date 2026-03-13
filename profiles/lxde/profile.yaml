@@ -1,0 +1,18 @@
+name: lxde
+packages:
+  - openbox
+  - obconf
+  - lxmenu-data
+  - menu-cache
+  - libfm
+  - pcmanfm
+  - lxde-common
+  - lxsession
+  - keybinder
+  - libwnck
+  - lxpanel
+  - lxappearance
+wm: startlxde
+config_layout: xdg-tree
+config_source: config
+xstartup_template: templates/xstartup.lxde

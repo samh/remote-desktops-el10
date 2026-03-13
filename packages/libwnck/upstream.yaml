@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/libwnck.git
+branch: f42
+spec: libwnck.spec
+sync_into: distgit

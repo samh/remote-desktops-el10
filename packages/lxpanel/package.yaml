@@ -1,0 +1,7 @@
+name: lxpanel
+build_after:
+  - libfm
+  - menu-cache
+  - keybinder
+  - libwnck
+fetch_script: scripts/fetch-sources.sh

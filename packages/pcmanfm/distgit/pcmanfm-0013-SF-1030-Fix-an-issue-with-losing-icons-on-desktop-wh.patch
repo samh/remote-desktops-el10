@@ -1,0 +1,51 @@
+From c23e94fb7757cc99eeb52a27f3d4d4119cdb92eb Mon Sep 17 00:00:00 2001
+From: Andriy Grytsenko <andrej@rep.kiev.ua>
+Date: Tue, 26 Dec 2017 00:53:22 +0200
+Subject: [PATCH 13/13] [SF#1030] Fix an issue with losing icons on desktop,
+ when file name has a '[' char.
+
+It should be properly escaped in desktop config file.
+---
+ NEWS          | 2 ++
+ src/desktop.c | 5 ++++-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/NEWS b/NEWS
+index 876f7f3..eef7891 100644
+--- a/NEWS
++++ b/NEWS
+@@ -1,6 +1,8 @@
+ * Fixed potential access violation, use runtime user dir instead of tmp dir
+     for single instance socket.
+ 
++* Fixed an issue with losing icons on desktop, when file name has a '[' char.
++
+ 
+ Changes on 1.2.5 since 1.2.4:
+ 
+diff --git a/src/desktop.c b/src/desktop.c
+index 4ec77b9..0686a59 100644
+--- a/src/desktop.c
++++ b/src/desktop.c
+@@ -2,7 +2,7 @@
+  *      desktop.c
+  *
+  *      Copyright 2010 - 2012 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
+- *      Copyright 2012-2016 Andriy Grytsenko (LStranger) <andrej@rep.kiev.ua>
++ *      Copyright 2012-2017 Andriy Grytsenko (LStranger) <andrej@rep.kiev.ua>
+  *
+  *      This program is free software; you can redistribute it and/or modify
+  *      it under the terms of the GNU General Public License as published by
+@@ -424,6 +424,9 @@ static void save_item_pos(FmDesktop* desktop)
+             case '\\':
+                 g_string_append(buf, "\\\\");
+                 break;
++            case '[':
++                g_string_append(buf, "\\[");
++                break;
+             case ']':
+                 g_string_append(buf, "\\]");
+                 break;
+-- 
+2.14.3
+

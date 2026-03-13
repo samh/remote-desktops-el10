@@ -6,6 +6,7 @@ packages plus user-level configuration.
 Examples:
 
 - a minimal Fluxbox session
+- an LXDE desktop on top of Openbox and PCManFM
 - an Openbox plus tint2 stack
 - a Wayland Sway session
 

@@ -39,10 +39,13 @@ composed by profiles in `profiles/`.
 Common entrypoints:
 
 - `just profile-build fluxbox`
+- `just profile-build lxde`
 - `just profile-build openbox-tint2`
 - `just profile-build sway`
 - `just profile-install-config fluxbox`
+- `just profile-install-config lxde`
 - `just profile-install-config sway`
+- `just profile-conf-turbovnc lxde`
 - `just profile-conf-turbovnc openbox-tint2`
 - `just apply-sway-config`
 
@@ -59,13 +62,24 @@ Current packages/profiles include:
 
 - `packages/fluxbox/`
 - `packages/fluxbox-styles-samh/`
+- `packages/keybinder/`
+- `packages/libfm/`
+- `packages/libwnck/`
+- `packages/lxappearance/`
+- `packages/lxde-common/`
+- `packages/lxmenu-data/`
+- `packages/lxpanel/`
+- `packages/lxsession/`
+- `packages/menu-cache/`
 - `packages/openbox/`
 - `packages/obconf/`
+- `packages/pcmanfm/`
 - `packages/dunst/`
 - `packages/tint2/`
 - `packages/wlroots/`
 - `packages/sway/`
 - `profiles/fluxbox/`
+- `profiles/lxde/`
 - `profiles/openbox-tint2/`
 - `profiles/sway/`
 
@@ -97,13 +111,13 @@ Useful reference:
   - [ ] Launcher such as rofi
 - [x] Create a personal COPR for any packages I build to make them easier
   to install
+- [x] Try building LXDE
 - [ ] Try building labwm
 - [ ] Try building Enlightenment
 - [ ] Try building Xfce
   - They are developing Wayland support, but based on Smithay, which as far
     as I can tell has no remote desktop solution so far.
   - May also be possible to use components on top of labwc
-- [ ] Try building LXDE
 - [ ] Investigate tech used by 
   [LSIO Webtop 4.0](https://www.linuxserver.io/blog/webtop-4-0-wayland-is-here-engage-the-reality-engine);
   e.g. can it work without a clumsy browser in the way?

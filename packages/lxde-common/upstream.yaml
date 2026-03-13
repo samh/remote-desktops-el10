@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/lxde-common.git
+branch: f43
+spec: lxde-common.spec
+sync_into: distgit

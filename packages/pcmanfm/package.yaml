@@ -1,0 +1,5 @@
+name: pcmanfm
+build_after:
+  - libfm
+  - menu-cache
+fetch_script: scripts/fetch-sources.sh

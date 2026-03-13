@@ -1,0 +1,3 @@
+type: local-spec
+spec: libfm.spec
+sync_into: distgit

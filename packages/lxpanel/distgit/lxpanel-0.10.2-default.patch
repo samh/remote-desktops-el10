@@ -1,0 +1,87 @@
+diff -dur lxpanel-0.5.9.orig/data/default/panels/panel.in lxpanel-0.5.9/data/default/panels/panel.in
+--- lxpanel-0.5.9.orig/data/default/panels/panel.in	2012-04-08 01:27:42.000000000 +0200
++++ lxpanel-0.5.9/data/default/panels/panel.in	2012-06-10 19:12:25.864088270 +0200
+@@ -14,8 +14,8 @@
+     setdocktype=1
+     setpartialstrut=1
+     usefontcolor=1
+-    fontcolor=#ffffff
+-    background=1
++    fontcolor=#000000
++    background=0
+     backgroundfile=@prefix@/share/lxpanel/images/background.png
+ }
+ 
+@@ -30,12 +30,13 @@
+         separator {
+         }
+         item {
++            image=system-run
+             command=run
+         }
+         separator {
+         }
+         item {
+-            image=gnome-logout
++            image=system-log-out
+             command=logout
+         }
+     }
+@@ -69,6 +70,7 @@
+     Config {
+         Button1=iconify
+         Button2=shade
++        Toggle=1
+     }
+ }
+ 
+diff -dur lxpanel-0.5.9.orig/data/two_panels/panels/bottom.in lxpanel-0.5.9/data/two_panels/panels/bottom.in
+--- lxpanel-0.5.9.orig/data/two_panels/panels/bottom.in	2012-04-08 01:27:42.000000000 +0200
++++ lxpanel-0.5.9/data/two_panels/panels/bottom.in	2012-06-10 18:49:41.559771662 +0200
+@@ -14,7 +14,7 @@
+     setdocktype=1
+     setpartialstrut=1
+     usefontcolor=0
+-    fontcolor=#ffffff
++    fontcolor=#000000
+     background=0
+     backgroundfile=@prefix@/share/lxpanel/images/background.png
+ }
+@@ -33,6 +33,7 @@
+     Config {
+         Button1=iconify
+         Button2=shade
++        Toggle=1
+     }
+ }
+ 
+diff -dur lxpanel-0.5.9.orig/data/two_panels/panels/top.in lxpanel-0.5.9/data/two_panels/panels/top.in
+--- lxpanel-0.5.9.orig/data/two_panels/panels/top.in	2012-04-08 01:27:42.000000000 +0200
++++ lxpanel-0.5.9/data/two_panels/panels/top.in	2012-06-10 19:13:06.529349244 +0200
+@@ -14,7 +14,7 @@
+     setdocktype=1
+     setpartialstrut=1
+     usefontcolor=0
+-    fontcolor=#ffffff
++    fontcolor=#000000
+     background=0
+     backgroundfile=@prefix@/share/lxpanel/images/background.png
+ }
+@@ -30,13 +30,14 @@
+         separator {
+         }
+         item {
+-            command = run
++            image=system-run
++            command=run
+         }
+         separator {
+         }
+         item {
+-            image = gnome-logout
+-            command = logout
++            image=system-log-out
++            command=logout
+         }
+     }
+ }

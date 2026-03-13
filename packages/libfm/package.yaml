@@ -1,0 +1,4 @@
+name: libfm
+build_after:
+  - menu-cache
+fetch_script: scripts/fetch-sources.sh

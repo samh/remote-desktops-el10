@@ -1,0 +1,13 @@
+--- lxde-common-0.99.2/startlxde.in.office	2016-11-22 07:59:09.000000000 +0900
++++ lxde-common-0.99.2/startlxde.in	2018-10-23 14:33:52.391246509 +0900
+@@ -30,8 +30,8 @@
+ # Clean up after GDM (GDM sets the number of desktops to one)
+ xprop -root -remove _NET_NUMBER_OF_DESKTOPS -remove _NET_DESKTOP_NAMES -remove _NET_CURRENT_DESKTOP 2> /dev/null
+ 
+-# Enable GTK+2 integration for OpenOffice.org, if available.
+-export SAL_USE_VCLPLUGIN=gtk
++# No longer set SAL_USE_VCLPLUGIN
++# export SAL_USE_VCLPLUGIN=gtk
+ 
+ # Launch DBus if needed
+ if which dbus-launch >/dev/null && test -z "$DBUS_SESSION_BUS_ADDRESS"; then

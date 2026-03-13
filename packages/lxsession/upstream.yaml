@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/lxsession.git
+branch: f43
+spec: lxsession.spec
+sync_into: distgit

@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/keybinder.git
+branch: f42
+spec: keybinder.spec
+sync_into: distgit
