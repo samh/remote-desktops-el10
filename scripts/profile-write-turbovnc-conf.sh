@@ -57,7 +57,10 @@ mkdir -p "$(dirname "${OUTPUT_PATH}")"
 tmp="$(mktemp)"
 
 if [[ -f "${OUTPUT_PATH}" ]]; then
-  awk '!/^[[:space:]]*\\$wm[[:space:]]*=/' "${OUTPUT_PATH}" > "${tmp}"
+  awk '
+    !/^[[:space:]]*\$wm[[:space:]]*=/ &&
+    !/^[[:space:]]*# Managed by (scripts\/profile-write-turbovnc-conf\.sh|fluxbox-stack\/scripts\/fluxbox-stack-write-turbovnc-conf\.sh)/
+  ' "${OUTPUT_PATH}" > "${tmp}"
 else
   : > "${tmp}"
 fi
@@ -73,4 +76,3 @@ chmod 600 "${OUTPUT_PATH}" || true
 
 echo "Wrote ${OUTPUT_PATH} with \$wm=\"${wm_name}\"."
 echo "Important: existing TurboVNC sessions keep their current WM."
-

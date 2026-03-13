@@ -12,7 +12,7 @@ packages:
   - libwnck
   - lxpanel
   - lxappearance
-wm: startlxde
+wm: LXDE
 config_layout: xdg-tree
 config_source: config
 xstartup_template: templates/xstartup.lxde
