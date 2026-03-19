@@ -63,6 +63,14 @@ To use with TurboVNC, set in `turbovncserver.conf`:
 $wm = "openbox";
 ```
 
+### Utilities
+
+Install `xdotool`:
+
+```bash
+sudo dnf install xdotool
+```
+
 ## Remote Desktop Options
 ### wayvnc
 I've been wanting to try wayvnc for a while to see how well it works.
