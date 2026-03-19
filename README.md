@@ -139,6 +139,7 @@ Current packages/profiles include:
 - `packages/dunst/`
 - `packages/tint2/`
 - `packages/wlroots/`
+- `packages/xdotool/`
 - `packages/sway/`
 - `profiles/fluxbox/`
 - `profiles/lxde/`
