@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/libfm-qt.git
+branch: f43
+spec: libfm-qt.spec
+sync_into: distgit

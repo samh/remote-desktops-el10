@@ -1,0 +1,3 @@
+name: lxqt-build-tools
+build_after:
+fetch_script: scripts/fetch-sources.sh

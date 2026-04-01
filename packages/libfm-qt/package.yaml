@@ -1,0 +1,5 @@
+name: libfm-qt
+build_after:
+  - lxqt-build-tools
+  - menu-cache
+fetch_script: scripts/fetch-sources.sh
