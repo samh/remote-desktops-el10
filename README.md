@@ -121,6 +121,22 @@ Common entrypoints:
 - `just profile-conf-turbovnc openbox-tint2`
 - `just apply-sway-config`
 
+Build target note:
+
+- The local build scripts originally defaulted to `epel-10-x86_64`, which on
+  this system maps to CentOS Stream 10 + EPEL in `mock`.
+- That can drift ahead of stable EL10 variants such as AlmaLinux 10 and Rocky
+  10. In practice, this caused local LXQt builds to link against Qt 6.10 while
+  the current AlmaLinux 10 repositories still provide Qt 6.9.
+- For local builds intended to be installed on AlmaLinux or similar stable
+  EL10 systems, prefer the `alma+epel-10-x86_64` mock target.
+- For COPR, prefer the stable `rhel+epel-10-x86_64` chroot rather than the
+  CentOS Stream `epel-10-x86_64` chroot when the goal is compatibility with
+  RHEL 10 and downstream stable EL10 rebuilds.
+- COPR chroots publish separate output repositories, so enabling both a stable
+  chroot and the CentOS Stream chroot is possible when both are intentionally
+  supported.
+
 Current LXQt note:
 
 - `lxqt-config` is built without touchpad settings on EL10 because the Xorg
