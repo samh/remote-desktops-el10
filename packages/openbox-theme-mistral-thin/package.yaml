@@ -1,1 +1,2 @@
 name: openbox-theme-mistral-thin
+fetch_script: scripts/fetch-sources.sh
