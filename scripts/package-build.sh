@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/libdesktop.sh"
 
 OUT_ROOT="${DESKTOP_REPO_DIR}/out"
-MOCK_TARGET="epel-10-x86_64"
+MOCK_TARGET="alma+epel-10-x86_64"
 CONTINUE_ON_ERROR=0
 FORCE_REBUILD=0
 REFRESH_LOCAL_REPO_ONLY=0
@@ -41,7 +41,7 @@ Usage: package-build.sh --package <name> [--package <name> ...] [options]
 Options:
   --package <name>       Package to build; may be passed multiple times
   --out-root <path>      Output root (default: repo/out)
-  --mock-target <target> Mock target (default: epel-10-x86_64)
+  --mock-target <target> Mock target (default: alma+epel-10-x86_64)
   --continue-on-error    Continue with later packages if a build fails
   --force-rebuild        Rebuild packages even if binary RPMs already exist
   --srpm-only           Stop after generating SRPMs

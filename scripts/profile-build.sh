@@ -7,7 +7,7 @@ source "${SCRIPT_DIR}/libdesktop.sh"
 
 PROFILE_NAME=""
 OUT_ROOT="${DESKTOP_REPO_DIR}/out"
-MOCK_TARGET="epel-10-x86_64"
+MOCK_TARGET="alma+epel-10-x86_64"
 CONTINUE_ON_ERROR=0
 FORCE_REBUILD=0
 
@@ -18,7 +18,7 @@ Usage: profile-build.sh --profile <name> [options]
 Options:
   --profile <name>      Profile to build
   --out-root <path>     Output root (default: repo/out)
-  --mock-target <name>  Mock target (default: epel-10-x86_64)
+  --mock-target <name>  Mock target (default: alma+epel-10-x86_64)
   --continue-on-error   Continue with later packages if a build fails
   --force-rebuild       Rebuild packages even if binary RPMs already exist
   -h, --help            Show this help
@@ -78,4 +78,3 @@ for package_name in "${packages[@]}"; do
 done
 
 "${cmd[@]}"
-

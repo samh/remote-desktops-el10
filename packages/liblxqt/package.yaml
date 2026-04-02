@@ -1,4 +1,5 @@
 name: liblxqt
 build_after:
   - lxqt-build-tools
+  - libqtxdg
 fetch_script: scripts/fetch-sources.sh
