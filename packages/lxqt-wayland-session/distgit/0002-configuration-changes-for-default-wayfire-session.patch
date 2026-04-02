@@ -1,0 +1,26 @@
+From 401ee311c16b7c5c4d53bbc066246a57a23eae09 Mon Sep 17 00:00:00 2001
+From: "Shawn W. Dunn" <sfalken@cloverleaf-linux.org>
+Date: Tue, 21 Jan 2025 17:07:30 +0000
+Subject: [PATCH 2/6] configuration changes for default wayfire session
+
+- Sets default Fedora background in wayfire session
+---
+ configurations/lxqt-wayfire.ini | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configurations/lxqt-wayfire.ini b/configurations/lxqt-wayfire.ini
+index 9e3386d..4088f73 100644
+--- a/configurations/lxqt-wayfire.ini
++++ b/configurations/lxqt-wayfire.ini
+@@ -129,7 +129,7 @@ toggle = <super> <ctrl> KEY_F
+ # Automatically start background and panel.
+ # Set to false if you want to override the default clients.
+ autostart_wf_shell = false
+-splash = swaybg -i /usr/share/lxqt/wallpapers/origami-dark.png
++splash = swaybg -i /usr/share/backgrounds/default.jxl
+ session = lxqt-session && killall wayfire
+ 
+ # Output configuration
+-- 
+2.53.0
+

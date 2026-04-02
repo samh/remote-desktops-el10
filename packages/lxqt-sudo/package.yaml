@@ -1,0 +1,5 @@
+name: lxqt-sudo
+build_after:
+  - liblxqt
+  - lxqt-build-tools
+fetch_script: scripts/fetch-sources.sh

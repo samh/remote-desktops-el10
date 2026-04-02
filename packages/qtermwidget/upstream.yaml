@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/qtermwidget.git
+branch: f43
+spec: qtermwidget.spec
+sync_into: distgit

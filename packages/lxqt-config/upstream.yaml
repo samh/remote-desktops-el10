@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/lxqt-config.git
+branch: f43
+spec: lxqt-config.spec
+sync_into: distgit

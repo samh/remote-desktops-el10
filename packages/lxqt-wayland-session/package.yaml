@@ -1,0 +1,4 @@
+name: lxqt-wayland-session
+build_after:
+  - liblxqt
+fetch_script: scripts/fetch-sources.sh

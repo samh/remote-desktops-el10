@@ -1,0 +1,8 @@
+name: lxqt-session
+build_after:
+  - liblxqt
+  - lxqt-globalkeys
+  - qtxdg-tools
+  - lxqt-qtplugin
+  - lxqt-config
+fetch_script: scripts/fetch-sources.sh

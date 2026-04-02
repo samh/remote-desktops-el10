@@ -109,14 +109,23 @@ Common entrypoints:
 
 - `just profile-build fluxbox`
 - `just profile-build lxde`
+- `just profile-build lxqt`
 - `just profile-build openbox-tint2`
 - `just profile-build sway`
 - `just profile-install-config fluxbox`
 - `just profile-install-config lxde`
+- `just profile-install-config lxqt`
 - `just profile-install-config sway`
 - `just profile-conf-turbovnc lxde`
+- `just profile-conf-turbovnc lxqt`
 - `just profile-conf-turbovnc openbox-tint2`
 - `just apply-sway-config`
+
+Current LXQt note:
+
+- `lxqt-config` is built without touchpad settings on EL10 because the Xorg
+  libinput development stack is not available there. This does not affect the
+  intended remote desktop use case.
 
 ## Monorepo Layout
 
@@ -132,25 +141,46 @@ Current packages/profiles include:
 - `packages/fluxbox/`
 - `packages/fluxbox-styles-samh/`
 - `packages/keybinder/`
+- `packages/libdbusmenu-lxqt/`
 - `packages/libfm/`
+- `packages/libfm-qt/`
+- `packages/liblxqt/`
+- `packages/libqtxdg/`
+- `packages/libstatgrab/`
+- `packages/libsysstat/`
 - `packages/libwnck/`
 - `packages/lxappearance/`
 - `packages/lxde-common/`
+- `packages/lximage-qt/`
 - `packages/lxmenu-data/`
 - `packages/lxpanel/`
 - `packages/lxsession/`
 - `packages/lxterminal/`
+- `packages/lxqt-build-tools/`
+- `packages/lxqt-config/`
+- `packages/lxqt-globalkeys/`
+- `packages/lxqt-menu-data/`
+- `packages/lxqt-panel/`
+- `packages/lxqt-qtplugin/`
+- `packages/lxqt-session/`
+- `packages/lxqt-sudo/`
+- `packages/lxqt-wayland-session/`
 - `packages/menu-cache/`
 - `packages/openbox/`
 - `packages/obconf/`
 - `packages/pcmanfm/`
+- `packages/pcmanfm-qt/`
 - `packages/dunst/`
+- `packages/qterminal/`
+- `packages/qtermwidget/`
+- `packages/qtxdg-tools/`
 - `packages/tint2/`
 - `packages/wlroots/`
 - `packages/xdotool/`
 - `packages/sway/`
 - `profiles/fluxbox/`
 - `profiles/lxde/`
+- `profiles/lxqt/`
 - `profiles/openbox-tint2/`
 - `profiles/sway/`
 
@@ -183,7 +213,7 @@ Useful reference:
 - [x] Create a personal COPR for any packages I build to make them easier
   to install
 - [x] Try building LXDE
-- [ ] Try building LXQt
+- [x] Try building LXQt
 - [ ] Try building labwc
 - [ ] Try building Enlightenment
 - [ ] Try building Xfce

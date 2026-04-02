@@ -1,0 +1,41 @@
+From c323c52a5ca92de9e8d33de1d0a4a45545fbe419 Mon Sep 17 00:00:00 2001
+From: Shawn W Dunn <sfalken@opensuse.org>
+Date: Mon, 16 Mar 2026 15:21:35 +0000
+Subject: [PATCH 3/6] configuration changes for default niri session
+
+- Disables "natural scrolling" in default session
+- Sets default Fedora Wallpaper for LXQt-niri
+---
+ configurations/lxqt-niri.kdl  | 2 +-
+ configurations/niri/input.kdl | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configurations/lxqt-niri.kdl b/configurations/lxqt-niri.kdl
+index b222b52..6e00910 100644
+--- a/configurations/lxqt-niri.kdl
++++ b/configurations/lxqt-niri.kdl
+@@ -14,7 +14,7 @@
+ // See the binds section below for more spawn examples.
+ // spawn-at-startup "waybar"
+ // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
+-   spawn-sh-at-startup "swaybg -i /usr/share/lxqt/wallpapers/waves-logo.png"
++   spawn-sh-at-startup "swaybg -i /usr/share/backgrounds/default.jxl"
+ // The above sets the wallpaper used in the overview.
+    spawn-sh-at-startup "lxqt-session && niri msg action quit -s"
+ 
+diff --git a/configurations/niri/input.kdl b/configurations/niri/input.kdl
+index ca0be06..fb61b8a 100644
+--- a/configurations/niri/input.kdl
++++ b/configurations/niri/input.kdl
+@@ -30,7 +30,7 @@ input {
+         dwtp
+         // drag false
+         // drag-lock
+-        natural-scroll
++        // natural-scroll
+         accel-speed 0.6
+         // accel-profile "flat"
+         // scroll-method "two-finger"
+-- 
+2.53.0
+

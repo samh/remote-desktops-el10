@@ -1,0 +1,25 @@
+name: lxqt
+packages:
+  - openbox
+  - qtermwidget
+  - qterminal
+  - libdbusmenu-lxqt
+  - libsysstat
+  - libfm-qt
+  - liblxqt
+  - libqtxdg
+  - lxqt-build-tools
+  - lxqt-config
+  - lxqt-globalkeys
+  - lxqt-menu-data
+  - lxqt-panel
+  - lxqt-qtplugin
+  - lxqt-session
+  - lxqt-sudo
+  - lxqt-wayland-session
+  - pcmanfm-qt
+  - qtxdg-tools
+wm: LXQt
+config_layout: xdg-tree
+config_source: config
+xstartup_template: templates/xstartup.lxqt

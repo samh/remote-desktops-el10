@@ -1,0 +1,60 @@
+From 8966c8c2407031b3b64bc272c54c87d45f59c968 Mon Sep 17 00:00:00 2001
+From: Shawn W Dunn <sfalken@opensuse.org>
+Date: Thu, 6 Nov 2025 15:05:25 +0000
+Subject: [PATCH 1/6] configuration changes for default labwc session
+
+- Set desktop background to the Fedora default
+- Move default user configs from $XDG_CONFIG_HOME/labwc to
+  $XDG_CONFIG_HOME/lxqt/labwc, avoids conflicts for users that use labwc
+  without the lxqt-session
+- Add LABWC_CONFIG_DIR env variable for labwc-tweaks compatibility
+---
+ configurations/labwc/autostart |  2 +-
+ startlxqtwayland.in            | 10 ++++++----
+ 2 files changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/configurations/labwc/autostart b/configurations/labwc/autostart
+index fa49741..acc3e44 100644
+--- a/configurations/labwc/autostart
++++ b/configurations/labwc/autostart
+@@ -3,7 +3,7 @@
+ # Preferred place for starting wayland-only applications
+ 
+ # Set background color or image (below the desktop):
+-swaybg -i /usr/share/lxqt/wallpapers/origami-dark-labwc.png  >/dev/null 2>&1 &
++swaybg -i /usr/share/backgrounds/default.jxl  >/dev/null 2>&1 &
+ 
+ # Faster startup for GTK apps:
+ dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY > /dev/null 2>&1 &
+diff --git a/startlxqtwayland.in b/startlxqtwayland.in
+index f3b2f4c..593e047 100644
+--- a/startlxqtwayland.in
++++ b/startlxqtwayland.in
+@@ -100,10 +100,10 @@ if  [ -z "$COMPOSITOR" ]; then
+ 
+ elif [ "$COMPOSITOR" = "labwc" ]; then
+     # Copy default configuration if not existing and set keyboard layout if different from us
+-    if [ ! -d "$XDG_CONFIG_HOME/labwc" ]; then
+-       cp -av "$share_dir"/lxqt/wayland/labwc "$XDG_CONFIG_HOME"/  # use default location here
++    if [ ! -d "$XDG_CONFIG_HOME/lxqt/labwc" ]; then
++       cp -av "$share_dir"/lxqt/wayland/labwc "$XDG_CONFIG_HOME"/lxqt/labwc/  # use default location here
+        if echo "$valid_layouts" | grep -q "$trylayout"; then
+-          echo "XKB_DEFAULT_LAYOUT=$trylayout" >> $XDG_CONFIG_HOME/labwc/environment
++          echo "XKB_DEFAULT_LAYOUT=$trylayout" >> $XDG_CONFIG_HOME/lxqt/labwc/environment
+        fi
+     fi
+ 
+@@ -113,7 +113,9 @@ elif [ "$COMPOSITOR" = "labwc" ]; then
+         echo "Running on virtualized hardware"
+     fi
+ 
+-    exec $COMPOSITOR -C $XDG_CONFIG_HOME/labwc -S lxqt-session
++    # Set LABWC_CONFIG_DIR for labwc-tweaks compatibility
++    export LABWC_CONFIG_DIR=$XDG_CONFIG_HOME/lxqt/labwc
++    exec $COMPOSITOR -C $XDG_CONFIG_HOME/lxqt/labwc -S lxqt-session
+ 
+ elif [ "$COMPOSITOR" = "niri" ]; then
+     if [ ! -f "$XDG_CONFIG_HOME/lxqt/wayland/lxqt-niri.kdl" ]; then
+-- 
+2.53.0
+

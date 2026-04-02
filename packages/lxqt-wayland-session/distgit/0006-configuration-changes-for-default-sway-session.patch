@@ -1,0 +1,24 @@
+From 7356d2ffdc21b44c1a7ebd89a06a7adb2a1b6bc6 Mon Sep 17 00:00:00 2001
+From: Shawn W Dunn <sfalken@opensuse.org>
+Date: Wed, 8 Oct 2025 20:17:37 +0000
+Subject: [PATCH 6/6] configuration changes for default sway session
+
+- Disable "include /etc/sway/config.d/*" avoids conflicts for users that
+  use lxqt-sway, and standard sway desktops
+---
+ configurations/lxqt-sway.config | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configurations/lxqt-sway.config b/configurations/lxqt-sway.config
+index 3a8d3a4..0469428 100644
+--- a/configurations/lxqt-sway.config
++++ b/configurations/lxqt-sway.config
+@@ -237,4 +237,4 @@ bindsym $mod+r mode "resize"
+     bindsym XF86MonBrightnessDown exec lxqt-config-brightness -d
+     bindsym XF86MonBrightnessUp exec lxqt-config-brightness -i
+ 
+-include /etc/sway/config.d/*
++# include /etc/sway/config.d/*
+-- 
+2.53.0
+

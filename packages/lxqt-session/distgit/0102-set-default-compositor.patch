@@ -1,0 +1,23 @@
+From 8f526a252ebf6075c976a6fb3ec16df1b0228adf Mon Sep 17 00:00:00 2001
+From: Shawn W Dunn <sfalken@opensuse.org>
+Date: Sat, 11 Oct 2025 15:51:49 -0700
+Subject: [PATCH 3/5] set default compositor
+
+---
+ config/session.conf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/config/session.conf b/config/session.conf
+index 61a865d..334d498 100644
+--- a/config/session.conf
++++ b/config/session.conf
+@@ -1,5 +1,6 @@
+ [General]
+ leave_confirmation=true
++compositor=miriway
+ 
+ [Environment]
+ GTK_CSD=0
+-- 
+2.51.0
+

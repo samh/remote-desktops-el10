@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/libstatgrab.git
+branch: f43
+spec: libstatgrab.spec
+sync_into: distgit

@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/qtxdg-tools.git
+branch: f43
+spec: qtxdg-tools.spec
+sync_into: distgit

@@ -1,0 +1,27 @@
+From e06368eb6bce11aa5fd43c80fafd7ad901192c70 Mon Sep 17 00:00:00 2001
+From: "Shawn W. Dunn" <sfalken@cloverleaf-linux.org>
+Date: Fri, 24 Jan 2025 16:05:54 +0000
+Subject: [PATCH 1/5] Add miriway entry for Wayland window managers
+
+See: https://github.com/lxqt/lxqt-session/pull/571
+---
+ config/waylandwindowmanagers.conf | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/config/waylandwindowmanagers.conf b/config/waylandwindowmanagers.conf
+index e727f43..0beb4f0 100644
+--- a/config/waylandwindowmanagers.conf
++++ b/config/waylandwindowmanagers.conf
+@@ -9,6 +9,9 @@ kwin_wayland/Comment=Window manager of the KDE Software Compilation
+ labwc/Name=Labwc
+ labwc/Comment=wlroots-based window-stacking compositor, inspired by openbox
+ 
++miriway/Name=Miriway
++miriway/Comment=Simple Wayland compositor built on Mir for building Desktop environments
++
+ niri/Name=niri
+ niri/Comment=A scrollable-tiling Wayland compositor
+ 
+-- 
+2.51.0
+

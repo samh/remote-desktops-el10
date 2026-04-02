@@ -1,0 +1,10 @@
+name: lxqt-panel
+build_after:
+  - libdbusmenu-lxqt
+  - libstatgrab
+  - liblxqt
+  - libsysstat
+  - lxqt-globalkeys
+  - lxqt-menu-data
+  - pcmanfm-qt
+fetch_script: scripts/fetch-sources.sh

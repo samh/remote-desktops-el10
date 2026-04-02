@@ -1,0 +1,2 @@
+name: libstatgrab
+fetch_script: scripts/fetch-sources.sh

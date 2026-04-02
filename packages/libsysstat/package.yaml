@@ -1,0 +1,4 @@
+name: libsysstat
+build_after:
+  - libqtxdg
+fetch_script: scripts/fetch-sources.sh

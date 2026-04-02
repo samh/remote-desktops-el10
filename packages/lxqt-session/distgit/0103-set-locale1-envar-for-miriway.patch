@@ -1,0 +1,24 @@
+From 70f5a4fc56dfc523795028828d171af934a2d389 Mon Sep 17 00:00:00 2001
+From: Shawn W Dunn <sfalken@opensuse.org>
+Date: Sat, 11 Oct 2025 16:27:08 -0700
+Subject: [PATCH 5/5] set locale1 envar for miriway
+
+---
+ config/session.conf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/config/session.conf b/config/session.conf
+index 334d498..4976788 100644
+--- a/config/session.conf
++++ b/config/session.conf
+@@ -5,6 +5,7 @@ compositor=miriway
+ [Environment]
+ GTK_CSD=0
+ GTK_OVERLAY_SCROLLING=0
++MIRIWAY_SYSTEM_LOCALE1_KEYMAP=1
+ 
+ [Mouse]
+ cursor_size=24
+-- 
+2.51.0
+

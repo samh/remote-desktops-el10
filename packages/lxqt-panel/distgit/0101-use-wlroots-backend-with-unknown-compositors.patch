@@ -1,0 +1,37 @@
+From a66b37aed30df9968c054f53ec8dede90a6ee081 Mon Sep 17 00:00:00 2001
+From: "Shawn W. Dunn" <sfalken@cloverleaf-linux.org>
+Date: Mon, 23 Jun 2025 09:18:13 +0000
+Subject: [PATCH] use wlroots backend with unknown compositors
+
+The description of the LXQtPanelApplicationPrivate::loadBackend() method
+already states that if we cannot identify the correct backend for a
+Wayland session, we should fall back to the wlroots backend module. This
+is reasonable given how broadly the wlr protocols are implemented.
+However, this was not happening due to a small error where we checked for
+the wlroots string in XDG_CURRENT_DESKTOP, which is not a valid option.
+
+This change fixes this by checking XDG_SESSION_TYPE for "wayland" instead.
+As this is fallback logic, this is safe as the preferred backend logic
+using XDG_CURRENT_DESKTOP still wins over this.
+
+See: https://github.com/lxqt/lxqt-panel/pull/2161
+---
+ panel/lxqtpanelapplication.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/panel/lxqtpanelapplication.cpp b/panel/lxqtpanelapplication.cpp
+index 51a3237..d366636 100644
+--- a/panel/lxqtpanelapplication.cpp
++++ b/panel/lxqtpanelapplication.cpp
+@@ -263,7 +263,7 @@ void LXQtPanelApplicationPrivate::loadBackend()
+         }
+     }
+ 
+-    if (preferredBackend.isEmpty() && xdgCurrentDesktops.contains(QStringLiteral("wlroots"), Qt::CaseInsensitive))
++    if (preferredBackend.isEmpty() && xdgSessionType == (QStringLiteral("wayland")))
+     {
+         qDebug() << "Specialized backend unavailable. Falling back to generic wlroots";
+         preferredBackend = QStringLiteral("wlroots");
+-- 
+2.49.0
+

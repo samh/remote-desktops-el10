@@ -1,0 +1,161 @@
+From 05061cd8a8aa7d698bb0f7797759a5f6e35f2eec Mon Sep 17 00:00:00 2001
+From: Shawn W Dunn <sfalken@opensuse.org>
+Date: Mon, 16 Mar 2026 15:29:47 +0000
+Subject: [PATCH 4/6] configuration adds miriway session
+
+Adds miriway session to package, being considered upstream @
+lxqt-wayland-session/pull/40
+---
+ configurations/CMakeLists.txt               |  2 +
+ configurations/miriway/lxqt-miriway-wrapper | 73 +++++++++++++++++++++
+ configurations/miriway/miriway-shell.config | 22 +++++++
+ startlxqtwayland.in                         | 10 +++
+ 4 files changed, 107 insertions(+)
+ create mode 100644 configurations/miriway/lxqt-miriway-wrapper
+ create mode 100644 configurations/miriway/miriway-shell.config
+
+diff --git a/configurations/CMakeLists.txt b/configurations/CMakeLists.txt
+index 38c43e3..e28015e 100644
+--- a/configurations/CMakeLists.txt
++++ b/configurations/CMakeLists.txt
+@@ -18,7 +18,9 @@ install(FILES
+ install(DIRECTORY
+     labwc
+     firstrun
++    miriway
+     niri
++    USE_SOURCE_PERMISSIONS
+     DESTINATION "${CMAKE_INSTALL_DATADIR}/lxqt/wayland"
+     COMPONENT Runtime
+ )
+diff --git a/configurations/miriway/lxqt-miriway-wrapper b/configurations/miriway/lxqt-miriway-wrapper
+new file mode 100644
+index 0000000..bc2f4d3
+--- /dev/null
++++ b/configurations/miriway/lxqt-miriway-wrapper
+@@ -0,0 +1,73 @@
++
++#!/bin/sh
++
++unset WAYLAND_DISPLAY
++unset DISPLAY
++
++port=0
++while [ -e "${XDG_RUNTIME_DIR}/wayland-${port}" ]; do
++    let port+=1
++done
++wayland_display=wayland-${port}
++
++export WAYLAND_DISPLAY=${wayland_display}
++
++# Support Xwayland when available
++if command -v Xwayland > /dev/null
++then
++  export MIR_SERVER_ENABLE_X11=1
++  MIR_SERVER_XWAYLAND_PATH=$(which Xwayland)
++  export MIR_SERVER_XWAYLAND_PATH
++fi
++
++# Imperfect workaround for layer-shell-qt bug
++# Cf. https://bugs.kde.org/show_bug.cgi?id=500520
++export MIR_ANCHOR_RECTANGLE_UNCONSTRAINED=1
++
++# Use server side decorations whenever possible
++export MIRIWAY_DECORATIONS="prefer-ssd"
++
++# Look in the LXQt namespace for LXQt Miriway configuration
++export MIRIWAY_CONFIG_DIR="lxqt"
++
++# If enabling Xwayland, set up tmpfile to identify X11 DISPLAY
++if [ $MIR_SERVER_ENABLE_X11 -eq 1 ]; then
++    x11_display_file=$(mktemp --tmpdir="${XDG_RUNTIME_DIR}")
++fi
++
++miriway-shell --display-config=static="${XDG_CONFIG_HOME}/miriway-shell.display-config" --add-wayland-extensions=all --lockscreen-app="lxqt-leave --lockscreen" --x11-displayfd 5 5>${x11_display_file} &
++miriway_pid=$!
++
++# Wait until the server starts
++until [ -O "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}" ]
++do
++  if ! kill -0 ${miriway_pid} &> /dev/null
++  then
++    echo "ERROR: miriway-shell [pid=${miriway_pid}] is not running"
++    exit 1
++  fi
++  inotifywait -qq --timeout 5 --event create "$(dirname "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}")"
++done
++
++# Grab the X11 DISPLAY and export it if needed
++if [ $MIR_SERVER_ENABLE_X11 -eq 1 ]; then
++  if inotifywait -qq --timeout 5 --event close_write "${x11_display_file}" && [ -s "${x11_display_file}" ]
++  then
++    # ${x11_display_file} contains the X11 display
++    DISPLAY=:$(cat "${x11_display_file}")
++    export DISPLAY
++    rm "${x11_display_file}"
++  else
++    echo "ERROR: Failed to get X11 display from miriway-shell [pid=${miriway-pid}]"
++    rm "${x11_display_file}"
++    kill ${miriway_pid}
++    exit 1
++  fi
++fi
++
++lxqt-session "$@"
++lxqt_session_exit_code=$?
++
++kill $miriway_pid
++
++exit $lxqt_session_exit_code
+diff --git a/configurations/miriway/miriway-shell.config b/configurations/miriway/miriway-shell.config
+new file mode 100644
+index 0000000..3b20d82
+--- /dev/null
++++ b/configurations/miriway/miriway-shell.config
+@@ -0,0 +1,22 @@
++x11-window-title=LXQt (Miriway)
++idle-timeout=600
++
++shell-component=dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
++
++shell-alt=Space:lxqt-runner
++shell-alt=F2:lxqt-runner
++shell-meta=l:lxqt-leave --lockscreen
++
++meta=p:pcmanfm-qt
++meta=Return:qterminal
++meta=f:featherpad
++
++meta=Left:@dock-left
++meta=Right:@dock-right
++meta=Space:@toggle-maximized
++meta=Home:@workspace-begin
++meta=End:@workspace-end
++meta=Page_Up:@workspace-up
++meta=Page_Down:@workspace-down
++ctrl-alt=BackSpace:@exit
++ctrl-alt=Up:@toggle-always-on-top
+diff --git a/startlxqtwayland.in b/startlxqtwayland.in
+index 593e047..9f1c1a9 100644
+--- a/startlxqtwayland.in
++++ b/startlxqtwayland.in
+@@ -143,6 +143,16 @@ elif [ "$COMPOSITOR" = "kwin_wayland" ]; then
+     # WARNING: Option '--no-kactivities' can result in crashes with animations and corner actions.
+     exec ${COMPOSITOR}_wrapper --exit-with-session lxqt-session --xwayland
+ 
++elif [ "$COMPOSITOR" = "miriway" ]; then
++    export XDG_CURRENT_DESKTOP="LXQt:$COMPOSITOR:mir"
++    if [ ! -f "$XDG_CONFIG_HOME/lxqt/miriway-shell.config" ]; then
++        cp "$share_dir"/lxqt/wayland/miriway/miriway-shell.config "$XDG_CONFIG_HOME/lxqt/miriway-shell.config"
++       if echo "$valid_layouts" | grep -q "$trylayout"; then
++          echo "keymap=$trylayout" >> "$XDG_CONFIG_HOME/lxqt/miriway-shell.config"
++       fi
++    fi
++    exec "${share_dir}/lxqt/wayland/${COMPOSITOR}/lxqt-${COMPOSITOR}-wrapper"
++
+ elif [ "$COMPOSITOR" = "wayfire" ]; then
+     if [ ! -f "$XDG_CONFIG_HOME/lxqt/wayland/lxqt-wayfire.ini" ]; then
+         cp "$share_dir"/lxqt/wayland/lxqt-wayfire.ini "$XDG_CONFIG_HOME"/lxqt/wayland/
+-- 
+2.53.0
+

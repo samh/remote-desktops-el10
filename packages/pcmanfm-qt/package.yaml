@@ -1,0 +1,5 @@
+name: pcmanfm-qt
+build_after:
+  - libfm-qt
+  - lxqt-menu-data
+fetch_script: scripts/fetch-sources.sh

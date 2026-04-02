@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/lxqt-sudo.git
+branch: f43
+spec: lxqt-sudo.spec
+sync_into: distgit

@@ -1,0 +1,4 @@
+name: lxqt-globalkeys
+build_after:
+  - liblxqt
+fetch_script: scripts/fetch-sources.sh

@@ -1,0 +1,4 @@
+name: libdbusmenu-lxqt
+build_after:
+  - libqtxdg
+fetch_script: scripts/fetch-sources.sh

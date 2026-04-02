@@ -1,0 +1,6 @@
+name: lxqt-config
+build_after:
+  - liblxqt
+  - lxqt-menu-data
+  - qterminal
+fetch_script: scripts/fetch-sources.sh

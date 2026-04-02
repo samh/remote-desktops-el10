@@ -1,0 +1,5 @@
+name: lxqt-qtplugin
+build_after:
+  - libdbusmenu-lxqt
+  - liblxqt
+fetch_script: scripts/fetch-sources.sh

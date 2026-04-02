@@ -1,0 +1,5 @@
+type: fedora-distgit
+url: https://src.fedoraproject.org/rpms/lxqt-globalkeys.git
+branch: f43
+spec: lxqt-globalkeys.spec
+sync_into: distgit

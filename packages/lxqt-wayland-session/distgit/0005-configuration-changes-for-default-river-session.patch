@@ -1,0 +1,25 @@
+From 8760fcae7be9cc976d990eb60713a22075c2f6f2 Mon Sep 17 00:00:00 2001
+From: "Shawn W. Dunn" <sfalken@cloverleaf-linux.org>
+Date: Thu, 23 Jan 2025 17:42:22 +0000
+Subject: [PATCH 5/6] configuration changes for default river session
+
+- Set Fedora default background for session
+---
+ configurations/lxqt-river-init | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configurations/lxqt-river-init b/configurations/lxqt-river-init
+index d847b76..732532d 100644
+--- a/configurations/lxqt-river-init
++++ b/configurations/lxqt-river-init
+@@ -166,6 +166,7 @@ done
+ riverctl background-color 0x002b36
+ riverctl border-color-focused 0x4ec2e8
+ riverctl border-color-unfocused 0x586e75
++riverctl spawn "swaybg -i /usr/share/backgrounds/default.jxl"
+ 
+ # Set keyboard repeat rate
+ riverctl set-repeat 50 300
+-- 
+2.53.0
+

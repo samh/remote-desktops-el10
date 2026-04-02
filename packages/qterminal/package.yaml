@@ -1,0 +1,5 @@
+name: qterminal
+build_after:
+  - liblxqt
+  - qtermwidget
+fetch_script: scripts/fetch-sources.sh
