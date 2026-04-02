@@ -1,10 +1,12 @@
 name: lxqt
 packages:
   - openbox
+  - openbox-theme-mistral-thin
   - qtermwidget
   - qterminal
   - libdbusmenu-lxqt
   - libsysstat
+  - libstatgrab
   - libfm-qt
   - liblxqt
   - libqtxdg
@@ -16,7 +18,6 @@ packages:
   - lxqt-qtplugin
   - lxqt-session
   - lxqt-sudo
-  - lxqt-wayland-session
   - pcmanfm-qt
   - qtxdg-tools
 wm: LXQt

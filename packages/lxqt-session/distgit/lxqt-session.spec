@@ -43,8 +43,8 @@ BuildRequires:  perl
 # use pcmanfm-qt for default desktop
 Recommends:   pcmanfm-qt
 
-# We want the Wayland session installed
-Requires:     lxqt-wayland-session
+# Keep Wayland session support optional on stable EL10 installs.
+Recommends:   lxqt-wayland-session
 
 # Retain this for now
 Recommends:   lxqt-x11-session

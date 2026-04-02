@@ -54,7 +54,8 @@ BuildRequires:  wayland-devel
 BuildRequires:  qt6-qtbase-private-devel
 Requires: lxqt-menu-data
 
-Requires: xscreensaver-base
+# Remote-desktop installs do not need a local screensaver backend.
+Recommends: xscreensaver-base
 Requires: lxmenu-data
 
 %description
