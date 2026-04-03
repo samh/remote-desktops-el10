@@ -37,8 +37,11 @@ BuildRequires:  pkgconfig(libproc2)
 BuildRequires:  qtxdg-tools
 BuildRequires:  perl
 
-#Needs Updated
-#Requires:      lxqt-themes-fedora
+# EL10 does not currently ship LXQt theme assets such as Clearlooks, so use
+# base themes that are available and avoid forcing an LXQt palette override.
+Requires:      adwaita-cursor-theme
+Requires:      adwaita-icon-theme
+Requires:      lxqt-themes
 
 # use pcmanfm-qt for default desktop
 Recommends:   pcmanfm-qt
@@ -59,6 +62,7 @@ Obsoletes:    %{name} < 2.1.1-5
 %package -n lxqt-x11-session
 BuildArch:    noarch
 Summary:      Files for LXQt X11 session
+Requires:     openbox
 Requires:     openbox-theme-mistral-thin
 Requires:     %{name} = %{version}-%{release}
 Requires:     dbus-x11
@@ -90,10 +94,14 @@ for name in config-session hibernate lockscreen logout reboot shutdown suspend; 
 done
 mkdir %{buildroot}%{_sysconfdir}/lxqt/
 cp %{buildroot}%{_datadir}/lxqt/lxqt.conf %{buildroot}%{_datadir}/lxqt/session.conf %{buildroot}%{_sysconfdir}/lxqt/
-%if 0%{?fedora}
-sed -i 's/theme=frost/theme=fedora-lxqt/g;s/icon_theme=oxygen/icon_theme=breeze/g' %{buildroot}%{_sysconfdir}/lxqt/lxqt.conf
-sed -i 's/cursor_theme=whiteglass/cursor_theme=breeze_cursors/g;/General/a window_manager=openbox' %{buildroot}%{_sysconfdir}/lxqt/session.conf
-%endif
+sed -i \
+  -e 's/^icon_theme=.*/icon_theme=Adwaita/' \
+  -e 's/^palette_override=.*/palette_override=false/' \
+  %{buildroot}%{_sysconfdir}/lxqt/lxqt.conf
+sed -i \
+  -e 's/^cursor_theme=.*/cursor_theme=Adwaita/' \
+  -e '/^\[General\]/a window_manager=openbox' \
+  %{buildroot}%{_sysconfdir}/lxqt/session.conf
 
 %find_lang lxqt-session --with-qt
 %find_lang lxqt-config-session --with-qt

@@ -18,6 +18,7 @@ packages:
   - lxqt-qtplugin
   - lxqt-session
   - lxqt-sudo
+  - lxqt-themes
   - pcmanfm-qt
   - qtxdg-tools
 wm: LXQt

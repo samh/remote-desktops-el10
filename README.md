@@ -142,6 +142,9 @@ Current LXQt note:
 - `lxqt-config` is built without touchpad settings on EL10 because the Xorg
   libinput development stack is not available there. This does not affect the
   intended remote desktop use case.
+- EL10 repos in use here do not provide `lxqt-themes`, so this repo packages
+  it directly and `lxqt-session` depends on it. That supplies the LXQt panel
+  and appearance themes that would otherwise be missing from fresh installs.
 
 ## Monorepo Layout
 
@@ -180,6 +183,7 @@ Current packages/profiles include:
 - `packages/lxqt-qtplugin/`
 - `packages/lxqt-session/`
 - `packages/lxqt-sudo/`
+- `packages/lxqt-themes/`
 - `packages/lxqt-wayland-session/`
 - `packages/menu-cache/`
 - `packages/openbox/`
@@ -231,6 +235,7 @@ Useful reference:
 - [x] Try building LXDE
 - [x] Try building LXQt
 - [ ] Try building labwc
+- [ ] Wayland session for LXQt, e.g. using labwc
 - [ ] Try building Enlightenment
 - [ ] Try building Xfce
   - They are developing Wayland support, but based on Smithay, which as far

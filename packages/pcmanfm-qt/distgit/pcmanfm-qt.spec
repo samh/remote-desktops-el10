@@ -31,6 +31,7 @@ BuildRequires:  pkgconfig(x11)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  lxqt-menu-data
 Requires:       lxqt-sudo
+Requires:       adwaita-icon-theme
 
 # for /usr/share/backgrounds/default.{jxl,png}
 Requires:       desktop-backgrounds-compat
@@ -69,7 +70,11 @@ bg_file_ext="jxl"
 if [ -f "%{_datadir}/backgrounds/default.png" ]; then
 bg_file_ext="png"
 fi
-sed -e "s|Wallpaper=.*$|Wallpaper=%{_datadir}/backgrounds/default.${bg_file_ext}|" -i config/pcmanfm-qt/lxqt/settings.conf.in
+sed \
+  -e "s|Wallpaper=.*$|Wallpaper=%{_datadir}/backgrounds/default.${bg_file_ext}|" \
+  -e 's/^IconThemeName=.*/IconThemeName=Adwaita/' \
+  -e 's/^FallbackIconThemeName=.*/FallbackIconThemeName=hicolor/' \
+  -i config/pcmanfm-qt/lxqt/settings.conf.in
 
 
 %build

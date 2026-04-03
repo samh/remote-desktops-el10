@@ -1,0 +1,4 @@
+name: lxqt-themes
+build_after:
+  - lxqt-build-tools
+fetch_script: scripts/fetch-sources.sh

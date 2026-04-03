@@ -61,7 +61,7 @@ fetch_sources() {
   fetch_script="$(package_fetch_script "${package_name}" || true)"
   if [[ -n "${fetch_script}" ]]; then
     "${fetch_script}"
-    return 0
+    return
   fi
 
   if command -v spectool >/dev/null 2>&1; then

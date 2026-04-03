@@ -1,0 +1,4 @@
+type: local-spec
+url: https://github.com/lxqt/lxqt-themes
+spec: lxqt-themes.spec
+sync_into: distgit
