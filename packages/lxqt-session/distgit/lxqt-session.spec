@@ -38,9 +38,9 @@ BuildRequires:  qtxdg-tools
 BuildRequires:  perl
 
 # EL10 does not currently ship LXQt theme assets such as Clearlooks, so use
-# base themes that are available and avoid forcing an LXQt palette override.
+# theme packages that are available and avoid forcing an LXQt palette override.
 Requires:      adwaita-cursor-theme
-Requires:      adwaita-icon-theme
+Requires:      gnome-icon-theme
 Requires:      lxqt-themes
 
 # use pcmanfm-qt for default desktop
@@ -95,7 +95,7 @@ done
 mkdir %{buildroot}%{_sysconfdir}/lxqt/
 cp %{buildroot}%{_datadir}/lxqt/lxqt.conf %{buildroot}%{_datadir}/lxqt/session.conf %{buildroot}%{_sysconfdir}/lxqt/
 sed -i \
-  -e 's/^icon_theme=.*/icon_theme=Adwaita/' \
+  -e 's/^icon_theme=.*/icon_theme=gnome/' \
   -e 's/^palette_override=.*/palette_override=false/' \
   %{buildroot}%{_sysconfdir}/lxqt/lxqt.conf
 sed -i \

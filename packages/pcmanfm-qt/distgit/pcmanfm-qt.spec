@@ -31,7 +31,7 @@ BuildRequires:  pkgconfig(x11)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  lxqt-menu-data
 Requires:       lxqt-sudo
-Requires:       adwaita-icon-theme
+Requires:       gnome-icon-theme
 
 # for /usr/share/backgrounds/default.{jxl,png}
 Requires:       desktop-backgrounds-compat
@@ -72,7 +72,7 @@ bg_file_ext="png"
 fi
 sed \
   -e "s|Wallpaper=.*$|Wallpaper=%{_datadir}/backgrounds/default.${bg_file_ext}|" \
-  -e 's/^IconThemeName=.*/IconThemeName=Adwaita/' \
+  -e 's/^IconThemeName=.*/IconThemeName=gnome/' \
   -e 's/^FallbackIconThemeName=.*/FallbackIconThemeName=hicolor/' \
   -i config/pcmanfm-qt/lxqt/settings.conf.in
 

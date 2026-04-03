@@ -145,6 +145,9 @@ Current LXQt note:
 - EL10 repos in use here do not provide `lxqt-themes`, so this repo packages
   it directly and `lxqt-session` depends on it. That supplies the LXQt panel
   and appearance themes that would otherwise be missing from fresh installs.
+- LXQt is configured to use `gnome-icon-theme` for icons and
+  `adwaita-cursor-theme` for cursors because that combination is more complete
+  on this EL10 base than Adwaita icons alone.
 
 ## Monorepo Layout
 

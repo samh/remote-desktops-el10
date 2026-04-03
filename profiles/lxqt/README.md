@@ -8,9 +8,9 @@ It uses `qterminal` as the terminal emulator and `pcmanfm-qt` for desktop and
 file manager duties.
 
 The package defaults are tuned so a fresh EL10 install works without per-user
-fixups: the LXQt session uses Adwaita icons/cursors, depends on `lxqt-themes`
-for panel and appearance assets, disables the missing LXQt palette override,
-and the X11 session subpackage pulls in `openbox` directly.
+fixups: the LXQt session uses GNOME icons and Adwaita cursors, depends on
+`lxqt-themes` for panel and appearance assets, disables the missing LXQt
+palette override, and the X11 session subpackage pulls in `openbox` directly.
 
 Current EL10 limitation: `lxqt-config` is built without touchpad settings.
 The missing piece is the Xorg libinput development stack (`xorg-libinput` /
