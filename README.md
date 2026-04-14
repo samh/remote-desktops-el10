@@ -76,6 +76,15 @@ To use with TurboVNC, set in `turbovncserver.conf`:
 $wm = "startlxde";
 ```
 
+If LXTerminal shows missing prompt or status-line symbols, install optional
+symbol fonts:
+
+```bash
+sudo dnf install powerline-fonts google-noto-sans-symbols-2-fonts google-noto-emoji-fonts
+```
+
+For more detail, see [profiles/lxde/README.md](profiles/lxde/README.md).
+
 ### Utilities
 
 Install `xdotool`:
