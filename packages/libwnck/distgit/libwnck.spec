@@ -1,7 +1,7 @@
 Summary: Window Navigator Construction Kit
 Name: libwnck
 Version: 2.31.0
-Release: 26%{?dist}
+Release: 28%{?dist}
 URL: http://download.gnome.org/sources/libwnck/
 #VCS: git:git://git.gnome.org/libwnck
 Source0: http://download.gnome.org/sources/libwnck/2.31/%{name}-%{version}.tar.xz
@@ -10,6 +10,7 @@ License: LicenseRef-Callaway-LGPLv2+
 
 Requires: startup-notification
 
+BuildRequires: gcc
 BuildRequires: glib2-devel
 BuildRequires: gtk2-devel
 BuildRequires:  pango-devel
@@ -18,7 +19,6 @@ BuildRequires:  libXt-devel
 BuildRequires:  libXres-devel
 BuildRequires:  gettext
 BuildRequires:  intltool
-BuildRequires:  gobject-introspection-devel
 BuildRequires: make
 
 
@@ -40,7 +40,7 @@ developing applications that use %{name}.
 
 %build
 
-%configure --disable-static --enable-introspection
+%configure --disable-static --disable-introspection
 make %{?_smp_mflags}
 
 %install
@@ -59,16 +59,20 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/wnck-urgency-monitor
 %files -f %{name}.lang
 %doc AUTHORS COPYING README NEWS
 %{_libdir}/lib*.so.*
-%{_libdir}/girepository-1.0/Wnck-1.0.typelib
 
 %files devel
 %{_libdir}/lib*.so
 %{_libdir}/pkgconfig/*
 %{_includedir}/*
-%{_datadir}/gir-1.0/Wnck-1.0.gir
 %doc %{_datadir}/gtk-doc
 
 %changelog
+* Mon Apr 14 2026 Sam Hartsfield <sahartsfield@minsait.com> - 2.31.0-28
+- Add explicit gcc BuildRequires
+
+* Mon Apr 14 2026 Sam Hartsfield <sahartsfield@minsait.com> - 2.31.0-27
+- Disable gobject-introspection: cairo-gobject pkgconfig not available on EL10
+
 * Fri Jan 17 2025 Fedora Release Engineering <releng@fedoraproject.org> - 2.31.0-26
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
 
