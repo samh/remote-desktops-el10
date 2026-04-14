@@ -63,6 +63,19 @@ To use with TurboVNC, set in `turbovncserver.conf`:
 $wm = "openbox";
 ```
 
+### LXDE
+
+Install the packages:
+
+```bash
+sudo dnf install lxde-common lxsession lxpanel lxappearance pcmanfm lxterminal
+```
+
+To use with TurboVNC, set in `turbovncserver.conf`:
+```perl
+$wm = "startlxde";
+```
+
 ### Utilities
 
 Install `xdotool`:
