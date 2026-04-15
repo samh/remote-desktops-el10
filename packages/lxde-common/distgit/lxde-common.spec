@@ -38,7 +38,7 @@
 
 Name:			lxde-common
 Version:		%{main_version}%{git_ver_rpm}
-Release:		6%{?dist}
+Release:		7%{?dist}
 Summary:		Default configuration files for LXDE
 
 # SPDX confirmed
@@ -59,7 +59,6 @@ Source10:       gtkrc.custom
 Source11:		libfm.conf.custom
 
 # Distro specific patches
-Patch10:		%{name}-0.99.2-pcmanfm-config.patch
 Patch11:		%{name}-0.99.3-lxpanel-config.patch
 Patch12:		%{name}-0.5.5-openbox-menu.patch
 Patch13:		%{name}-0.3.2.1-logout-banner.patch
@@ -93,7 +92,7 @@ Requires:		xorg-x11-xinit
 Requires:		/usr/bin/xprop
 # Use vendor's artwork
 Requires:		system-logos
-Requires:		desktop-backgrounds-compat
+#Suggests:		desktop-backgrounds-compat
 Requires:		gnome-icon-theme-legacy
 
 BuildArch:		noarch
@@ -135,9 +134,8 @@ git config user.name "%{name} Fedora maintainer"
 git config user.email "%{name}-maintainer@fedoraproject.org"
 
 
-%patch -P10 -p1 -b .orig
-%patch -P11 -p1 -b .orig2
-%patch -P12 -p1 -b .orig3
+%patch -P11 -p1 -b .orig
+%patch -P12 -p1 -b .orig2
 %patch -P13 -p1 -b .logout-banner
 %patch -P15 -p1 -b .vendor
 %patch -P16 -p1 -b .office
@@ -146,12 +144,6 @@ git config user.email "%{name}-maintainer@fedoraproject.org"
 # maintaining two patches we just strip the prefixes from the files we just
 # patched with patch 100.
 sed -i 's|id=fedora-|id=|' lxpanel/panel.in
-
-# Fedora 43 changed default background file format
-%if 0%{?fedora} >= 42
-sed -i.f43 pcmanfm/pcmanfm.conf.in \
-	-e '\@wallpaper=@s|default.png|default.jxl|'
-%endif
 
 # Change openbox window border theme
 # Onyx border style is hard to see...
@@ -239,6 +231,10 @@ install -cpm 0644 %{SOURCE11} %{buildroot}%{_sysconfdir}/xdg/lxsession/libfm/lib
 
 
 %changelog
+* Wed Apr 15 2026 Sam H <samh@noreply> - 0.99.3-7
+- Drop dependency on desktop-backgrounds-compat to avoid extra dependency
+- Remove obsolete wallpaper patch and Fedora-specific wallpaper format rewrite
+
 * Fri Mar 13 2026 Sam H <samh@noreply> - 0.99.3-6
 - Require lxterminal so the LXDE profile includes a terminal emulator
 
