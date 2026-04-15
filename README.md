@@ -152,12 +152,9 @@ Build target note:
   the current AlmaLinux 10 repositories still provide Qt 6.9.
 - For local builds intended to be installed on AlmaLinux or similar stable
   EL10 systems, prefer the `alma+epel-10-x86_64` mock target.
-- For COPR, prefer the stable `rhel+epel-10-x86_64` chroot rather than the
-  CentOS Stream `epel-10-x86_64` chroot when the goal is compatibility with
-  RHEL 10 and downstream stable EL10 rebuilds.
-- COPR chroots publish separate output repositories, so enabling both a stable
-  chroot and the CentOS Stream chroot is possible when both are intentionally
-  supported.
+- COPR is configured to build using both the stable `rhel+epel-10-x86_64`
+  chroot for stable RHEL and variants as well as `epel-10-x86_64` chroot for
+  CentOS Stream (each chroot publishes a separate output yum repository)
 
 Current LXQt note:
 
