@@ -73,11 +73,11 @@ sudo dnf install lxde-common lxsession lxpanel lxappearance pcmanfm lxterminal
 
 To use with TurboVNC, set in `turbovncserver.conf`:
 ```perl
-$wm = "startlxde";
+$wm = "LXDE";
 ```
 
 If LXTerminal shows missing prompt or status-line symbols, install optional
-symbol fonts:
+symbol fonts (`powerline-fonts` is in EPEL10):
 
 ```bash
 sudo dnf install powerline-fonts google-noto-sans-symbols-2-fonts google-noto-emoji-fonts
